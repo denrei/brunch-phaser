@@ -1,19 +1,45 @@
-const game = window.GAME = new Phaser.Game({
-  // See <https://photonstorm.github.io/phaser-ce/global.html#GameConfig>
-  // antialias:               true,
-  // backgroundColor:         0x000000,
-  // disableVisibilityChange: false,
-  // enableDebug:             true,
-  // height:                  600,
-  // renderer:                Phaser.AUTO,
-  // resolution:              1,
-  // scaleMode:               Phaser.ScaleManager.NO_SCALE,
-  // transparent:             false,
-  // width:                   800,
-});
+var config = {
 
-game.state.add('boot', require('states/boot'));
-game.state.add('game', require('states/game'));
-game.state.add('menu', require('states/menu'));
+  type: Phaser.AUTO,
 
-game.state.start('boot');
+  width: 800,
+
+  height: 600,
+
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 180 }
+    }
+  },
+
+  scene: {
+
+    preload() {
+      this.load.setPath('assets/');
+      this.load.image('sky', 'space3.png');
+      this.load.image('logo', 'phaser3-logo.png');
+      this.load.image('red', 'red.png');
+    },
+
+    create() {
+      const sky = this.add.image(400, 300, 'sky');
+      sky.alpha = 0.5;
+      const particles = this.add.particles('red');
+      const emitter = particles.createEmitter({
+        speed: 100,
+        scale: { start: 1, end: 0 },
+        blendMode: 'ADD'
+      });
+      const logo = this.physics.add.image(400, 100, 'logo');
+      logo.setVelocity(100, 200);
+      logo.setBounce(1, 1);
+      logo.setCollideWorldBounds(true);
+      emitter.startFollow(logo);
+    }
+
+  }
+
+};
+
+window.game = new Phaser.Game(config);

@@ -4,9 +4,7 @@ env:
   es6: yes
 extends: 'eslint:recommended'
 globals:
-  p2: no
   Phaser: no
-  PIXI: no
 rules:
   indent:
     - error
