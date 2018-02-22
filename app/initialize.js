@@ -1,4 +1,4 @@
-class Scene extends Phaser.Scene {
+class DefaultScene extends Phaser.Scene {
 
   constructor (sceneConfig) {
     super(sceneConfig);
@@ -44,7 +44,7 @@ var config = {
     }
   },
 
-  scene: Scene
+  scene: DefaultScene
 
 };
 
