@@ -1,9 +1,9 @@
 Brunch with Phaser 3
 ====================
 
-A [Brunch](http://brunch.io) skeleton for making games with [Phaser 3](http://phaser.io/phaser3). ([Why brunch?](http://brunch.io/docs/why-brunch))
+A [Brunch](http://brunch.io) skeleton for making games with [Phaser 3](http://phaser.io/phaser3). ([Why Brunch?](http://brunch.io/docs/why-brunch))
 
-You can use CoffeeScript, ES6, TypeScript, or plain JavaScript.
+You can use [CoffeeScript][1], [ES6][2], [TypeScript][3], or plain JavaScript.
 
     brunch new <project> -s phaser
 
@@ -14,9 +14,9 @@ Get started
   - [Node.js](https://nodejs.org)
   - [Brunch](http://brunch.io): `npm install -g brunch`
 - Run:
-  - `brunch new <project> -s samme/brunch-phaser`
+  - `brunch new <project> -s phaser`
   - `npm run start` or `brunch watch --server` watches the project with continuous rebuild.
-  - `npm run build` or `brunch build --production` builds minified project for production.
+  - `npm run build` or `brunch build --production` builds a minified project for production.
 - Make:
   - Write your code in [app](app).
   - Put game assets in [assets](app/static/assets).
@@ -24,7 +24,7 @@ Get started
 Phaser
 ------
 
-Phaser is managed through NPM.
+Phaser is managed through [npm](https://docs.npmjs.com/cli/npm).
 
     npm ls --production
 
@@ -36,7 +36,7 @@ Update with:
 
 See the `npm.static` entry in [brunch-config](./brunch-config.coffee).
 
-### Phaser 2 (CE)
+### Phaser 2 (Phaser CE)
 
 Instead of `brunch new`, run:
 
@@ -47,9 +47,13 @@ git clone https://github.com/samme/brunch-phaser.git project --branch phaser2
 Add NPM packages
 ----------------
 
-    npm install -S <package>
+    npm install -S <package-name>
 
-and `require('<package>')` in your code.
+and in your code:
+
+```javascript
+require('package-name');
+```
 
 Add other libraries
 -------------------
@@ -59,15 +63,25 @@ Add the unminified script to [vendor](vendor).
 Plugins
 -------
 
-[Brunch has many](http://brunch.io/plugins).
-
 ```shell
 # List
 npm list --dev --depth=0
 
-# Add
+# Add (http://brunch.io/plugins)
 npm install -D plugin-name
 
 # Remove, e.g.,
 npm uninstall -D babel-brunch brunch-typescript coffee-script-brunch
 ```
+
+### Settings
+
+- [babel-brunch](https://www.npmjs.com/package/babel-brunch#configuration)
+- [coffee-script-brunch](https://www.npmjs.com/package/coffee-script-brunch#configuration)
+- [typescript-brunch](https://www.npmjs.com/package/typescript-brunch#brunch-config)
+- [uglify-js-brunch](https://www.npmjs.com/package/uglify-js-brunch#usage)
+  - [minify options](https://www.npmjs.com/package/uglify-js#minify-options)
+
+[1]: http://coffeescript.org
+[2]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_2015_support_in_Mozilla
+[3]: https://www.typescriptlang.org
