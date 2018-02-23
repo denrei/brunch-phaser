@@ -1,39 +1,50 @@
-config =
-
-  type: Phaser.AUTO
-
+window.game = new (Phaser.Game)(
   width: 800
-
   height: 600
-
+  # zoom: 1
+  # resolution: 1
+  # type: Phaser.AUTO
+  # parent: null
+  # canvas: null
+  # canvasStyle: null
+  # seed: null
+  title: '☕️ Brunch with Phaser' # 'My Phaser Game'
+  url: 'https://github.com/samme/brunch-phaser'
+  version: '0.0.1'
+  # input:
+  #   keyboard: on
+  #   mouse: on
+  #   touch: on
+  #   gamepad: off
+  # disableContextMenu: on
+  # banner: off
+  banner:
+    # hidePhaser: off
+    text: 'white'
+    background: [
+      '#e54661'
+      '#ffa644'
+      '#998a2f'
+      '#2c594f'
+      '#002d40'
+    ]
+  # fps:
+  #   min: 10
+  #   target: 60
+  #   forceSetTimeout: off
+  # pixelArt: off
+  # transparent: off
+  # clearBeforeRender: on
+  # backgroundColor: 0x000000
+  loader:
+    # baseURL: ''
+    path: 'assets/'
+    maxParallelDownloads: 6
+    # crossOrigin: 'anonymous'
+    # timeout: 0
   physics:
     default: 'arcade'
-    arcade: gravity: y: 180
-
-  scene:
-
-    preload: ->
-      @load.setPath 'assets/'
-      @load.image 'sky', 'space3.png'
-      @load.image 'logo', 'phaser3-logo.png'
-      @load.image 'red', 'red.png'
-      return
-
-    create: ->
-      sky = @add.image 400, 300, 'sky'
-      sky.alpha = 0.5
-      particles = @add.particles 'red'
-      emitter = particles.createEmitter
-        speed: 100
-        scale:
-          start: 1
-          end: 0
-        blendMode: 'ADD'
-      logo = @physics.add.image 400, 100, 'logo'
-      logo.setVelocity 100, 200
-      logo.setBounce 1, 1
-      logo.setCollideWorldBounds true
-      emitter.startFollow logo
-      return
-
-window.game = new Phaser.Game config
+    arcade:
+      gravity:
+        y: 180
+  scene: require('scenes/default'))
