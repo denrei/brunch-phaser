@@ -5,6 +5,8 @@ env:
 extends: 'eslint:recommended'
 globals:
   Phaser: no
+parserOptions:
+  sourceType: module
 rules:
   indent:
     - error

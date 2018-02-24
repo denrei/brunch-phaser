@@ -1,3 +1,5 @@
+import defaultScene from 'scenes/default';
+
 window.game = new Phaser.Game({
 
   // See <https://github.com/photonstorm/phaser/blob/master/src/boot/Config.js>
@@ -51,6 +53,6 @@ window.game = new Phaser.Game({
       }
     }
   },
-  scene: require('scenes/default'),
+  scene: defaultScene,
 
 });

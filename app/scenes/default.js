@@ -1,4 +1,4 @@
-module.exports = class Default extends Phaser.Scene {
+export default class Default extends Phaser.Scene {
 
   constructor (sceneConfig) {
     super(sceneConfig);
@@ -48,4 +48,4 @@ module.exports = class Default extends Phaser.Scene {
     console.log('progress', progress);
   }
 
-};
+}
