@@ -7,6 +7,8 @@ You can use [CoffeeScript][1], [ES6][2], [TypeScript][3], or plain JavaScript.
 
     brunch new <project> -s phaser
 
+(For Phaser 2 [CE], please see [brunch-phaser2](https://github.com/samme/brunch-phaser2).)
+
 Get started
 -----------
 
