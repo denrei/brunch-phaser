@@ -1,24 +1,17 @@
 export default class Default extends Phaser.Scene {
 
-  constructor (sceneConfig) {
-    super(sceneConfig);
+  constructor () {
+    super('default');
+    this.score = null;
   }
 
   init (data) {
-    console.log('init', data);
-  }
-
-  preload () {
-    this.load.image('sky', 'space3.png');
-    this.load.image('logo', 'phaser3-logo.png');
-    this.load.image('red', 'red.png');
-    this.progressBar = this.add.graphics(0, 0);
-    this.load.on('progress', this.onLoadProgress, this);
-    this.load.on('complete', this.onLoadComplete, this);
+    console.log('init', this.scene.key, data, this);
+    this.score = 0;
   }
 
   create () {
-    const sky = this.add.image(400, 300, 'sky');
+    var sky = this.add.image(400, 300, 'sky');
     sky.alpha = 0.5;
     const particles = this.add.particles('red');
     const emitter = particles.createEmitter({
@@ -31,21 +24,17 @@ export default class Default extends Phaser.Scene {
     logo.setBounce(1, 1);
     logo.setCollideWorldBounds(true);
     emitter.startFollow(logo);
+    this.input.keyboard.once('keydown_Q', this.quit, this);
+  }
+
+  update () {
+    this.score += 1;
   }
 
   // extend:
 
-  onLoadComplete () { // (loader, storageSize, failedSize)
-    console.log('onLoadComplete');
-    this.progressBar.destroy();
-  }
-
-  onLoadProgress (progress) {
-    this.progressBar
-      .clear()
-      .fillStyle(0xffffff, 0.75)
-      .fillRect(0, 0, 800 * progress, 50);
-    console.log('progress', progress);
+  quit () {
+    this.scene.start('menu', { score: this.score });
   }
 
 }

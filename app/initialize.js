@@ -1,4 +1,6 @@
-import defaultScene from 'scenes/default';
+import BootScene from 'scenes/boot';
+import DefaultScene from 'scenes/default';
+import MenuScene from 'scenes/menu';
 
 window.game = new Phaser.Game({
 
@@ -53,6 +55,10 @@ window.game = new Phaser.Game({
       }
     }
   },
-  scene: defaultScene,
+  scene: [
+    BootScene,
+    DefaultScene,
+    MenuScene
+  ],
 
 });
