@@ -1,4 +1,4 @@
-window.game = new (Phaser.Game)(
+window.game = new Phaser.Game
   width: 800
   height: 600
   # zoom: 1
@@ -8,7 +8,7 @@ window.game = new (Phaser.Game)(
   # canvas: null
   # canvasStyle: null
   # seed: null
-  title: '☕️ Brunch with Phaser' # 'My Phaser Game'
+  title: '☕️ Brunch with Phaser'
   url: 'https://github.com/samme/brunch-phaser'
   version: '0.0.1'
   # input:
@@ -16,7 +16,7 @@ window.game = new (Phaser.Game)(
   #   mouse: on
   #   touch: on
   #   gamepad: off
-  # disableContextMenu: on
+  # disableContextMenu: off
   # banner: off
   banner:
     # hidePhaser: off
@@ -47,4 +47,8 @@ window.game = new (Phaser.Game)(
     arcade:
       gravity:
         y: 180
-  scene: require('scenes/default'))
+  scene: [
+    require('scenes/boot')
+    require('scenes/default')
+    require('scenes/menu')
+  ]
