@@ -1,15 +1,19 @@
-var FONT = 'Futura,system-ui,sans-serif';
+const FONT = 'Futura,system-ui,sans-serif';
 
-module.exports = {
+export default class Menu extends Phaser.Scene {
 
-  key: 'menu',
+  constructor () {
+    super('menu');
+    this.highScore = null;
+  }
 
-  init: function (data) {
+  init (data) {
+    console.log('init', this.scene.key, data, this);
     this.highScore = data.score || 0;
-  },
+  }
 
-  create: function () {
-    var sky = this.add.image(400, 300, 'sky');
+  create () {
+    const sky = this.add.image(400, 300, 'sky');
     sky.alpha = 0.25;
     this.add.text(400, 300, 'START', {
       fill: 'white',
@@ -26,17 +30,12 @@ module.exports = {
       .setOrigin(0.5)
       .setShadow(0, 1, 'black', 5);
     this.input.on('pointerup', this.start, this);
-  },
-
-  extend: {
-
-    highScore: 0,
-
-    start: function () {
-      this.scene.start('default', {today: (new Date).toString()});
-    }
-
   }
 
+  // extend:
 
-};
+  start () {
+    this.scene.start('default', { today: (new Date).toString() });
+  }
+
+}
