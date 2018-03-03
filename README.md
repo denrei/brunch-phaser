@@ -69,8 +69,23 @@ Update with:
 
 See the `npm.static` entry in [brunch-config](./brunch-config.coffee).
 
+<<<<<<< HEAD
 Add packages
 ------------
+=======
+### Phaser 2 (Phaser CE)
+
+Instead of `brunch new`, run:
+
+```shell
+git clone https://github.com/samme/brunch-phaser.git project --branch phaser2
+```
+
+For custom builds, see `npm.static` in [brunch-config](brunch-config.coffee).
+
+Add NPM packages
+----------------
+>>>>>>> coffee
 
     npm install -S <package-name>
 
