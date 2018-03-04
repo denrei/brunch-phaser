@@ -18,9 +18,7 @@ export default class TileDemo extends Phaser.Scene {
         this.add.text(400, 300, 'TILE DEMO', {
             fill: 'white',
             fontSize: 48
-        })
-            .setOrigin(0.5)
-            .setShadow(0, 1, '#62F6FF', 10);
+        }).setOrigin(0.5);
 
 
         var map_tiledemo, tileset, tileset2, layer1, layer2, layer3;
