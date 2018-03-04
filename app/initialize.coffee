@@ -1,6 +1,6 @@
 window.game = new Phaser.Game
-  width: 800
-  height: 600
+  width: 1024
+  height: 768
   # zoom: 1
   # resolution: 1
   # type: Phaser.AUTO
@@ -8,8 +8,8 @@ window.game = new Phaser.Game
   # canvas: null
   # canvasStyle: null
   # seed: null
-  title: '☕️ Brunch with Phaser'
-  url: 'https://github.com/samme/brunch-phaser'
+  title: '☕️ Brunch with Phaser - RogueHack'
+  url: 'https://github.com/denrei/roguehack'
   version: '0.0.1'
   # input:
   #   keyboard: on
@@ -48,7 +48,8 @@ window.game = new Phaser.Game
       gravity:
         y: 180
   scene: [
-    require('scenes/boot')
-    require('scenes/default')
-    require('scenes/menu')
+#    require('scenes/boot')
+#    require('scenes/default')
+#    require('scenes/menu')
+    require('scenes/nshiff')
   ]
