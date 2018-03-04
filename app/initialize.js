@@ -1,5 +1,6 @@
 import BootScene from 'scenes/boot';
 import DefaultScene from 'scenes/default';
+import TileDemoScene from 'scenes/tiledemo';
 import MenuScene from 'scenes/menu';
 
 window.game = new Phaser.Game({
@@ -15,8 +16,8 @@ window.game = new Phaser.Game({
   // canvas: null,
   // canvasStyle: null,
   // seed: null,
-  title: '☕️ Brunch with Phaser', // 'My Phaser 3 Game'
-  url: 'https://github.com/samme/brunch-phaser',
+  title: 'RogueHack', // 'My Phaser 3 Game'
+  url: 'https://github.com/denrei/roguehack',
   version: '0.0.1',
   // input: {
   //   keyboard: true,
@@ -58,6 +59,7 @@ window.game = new Phaser.Game({
   scene: [
     BootScene,
     DefaultScene,
+    TileDemoScene,
     MenuScene
   ],
 

@@ -35,7 +35,7 @@ export default class Menu extends Phaser.Scene {
   // extend:
 
   start () {
-    this.scene.start('default', { today: (new Date).toString() });
+    this.scene.start('tiledemo', { today: (new Date).toString() });
   }
 
 }
