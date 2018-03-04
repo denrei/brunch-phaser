@@ -8,8 +8,7 @@ export default class TileDemo extends Phaser.Scene {
     preload() {
         var PATH_DATA = '../data/';
         var PATH_ASSETS = './';
-        this.load.tilemapTiledJSON('map', PATH_DATA + 'map.json');
-        this.load.tilemapTiledJSON('map2', PATH_DATA + 'map2.json');
+        this.load.tilemapTiledJSON('map_tiledemo', PATH_DATA + 'map_tiledemo.json');
         this.load.image('tiles', PATH_ASSETS + 'tiles.png');
         this.load.image('super-mario-16bit', PATH_ASSETS + 'super-mario-16bit.png');
         this.load.plugin('AnimatedTiles', PATH_DATA + 'AnimatedTiles.js');
@@ -24,18 +23,19 @@ export default class TileDemo extends Phaser.Scene {
             .setShadow(0, 1, '#62F6FF', 10);
 
 
-        var map, map2, tileset, tileset2, layer1, layer2, layer3, map2layer, countdown, changed;
+        var map_tiledemo, tileset, tileset2, layer1, layer2, layer3;
         this.sys.install('AnimatedTiles');
-        map = this.make.tilemap({key: 'map'});
+        map_tiledemo = this.make.tilemap({key: 'map_tiledemo'});
 
-        tileset = map.addTilesetImage('tiles', 'tiles');
-        tileset2 = map.addTilesetImage('super-mario-16bit', 'super-mario-16bit');
+        tileset = map_tiledemo.addTilesetImage('tiles', 'tiles');
+        tileset2 = map_tiledemo.addTilesetImage('super-mario-16bit', 'super-mario-16bit');
+
         // Add first maps three layers with corresponing tilesets (the third having a tileset of it's own)
-        layer1 = map.createDynamicLayer('ground', tileset, 0, 0);
-        layer2 = map.createDynamicLayer('aboveGround', tileset, 0, 0);
-        layer3 = map.createDynamicLayer('another', tileset2, 0, 0);
-        // Init animations on map
-        this.sys.animatedTiles.init(map);
+        layer1 = map_tiledemo.createDynamicLayer('ground', tileset, 0, 0);
+        layer2 = map_tiledemo.createDynamicLayer('aboveGround', tileset, 0, 0);
+        layer3 = map_tiledemo.createDynamicLayer('another', tileset2, 0, 0);
+
+        this.sys.animatedTiles.init(map_tiledemo);
 
     }
 
