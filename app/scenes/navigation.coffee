@@ -1,5 +1,5 @@
 RogueHack =
-  displayMessage: (message) ->
+  displayGameMessage: (message) ->
     console.log('(game message) ' + message)
 
 module.exports =
@@ -39,7 +39,7 @@ module.exports =
     @add.image 384, -128, 'wall'
     @add.image 128*4, -128, 'wall'
 
-    RogueHack.displayMessage('Character: Hello world? That sounds familiar.')
+    RogueHack.displayGameMessage('Watson: Hello world.')
 
     @playerSprite = @add.image 0, 0, 'red'
 

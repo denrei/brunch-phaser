@@ -1,11 +1,9 @@
 RogueHack =
-  resizeCanvas: ->
-    aspectRatio = 1.6
-    canvasX = window.innerWidth
-    canvasY = canvasX / aspectRatio
-    window.game.renderer.resize(canvasX, canvasY, 1.0);
-    console.log "Resized #{ game.canvas.width } x #{ game.canvas.height }"
-
+  hasViewportResized: false
+  handleResize: ->
+    if !RogueHack.hasViewportResized
+      RogueHack.hasViewportResized = true
+      console.error 'RogueHack: viewport resized! zoom now incorrect. refresh page for correct zoom.'
 module.exports =
 
   key: 'boot'
@@ -23,8 +21,7 @@ module.exports =
   create: ->
 
     window.onresize = () =>
-      RogueHack.resizeCanvas()
-    RogueHack.resizeCanvas()
+      RogueHack.handleResize()
 
     @scene.start 'menu'
     return

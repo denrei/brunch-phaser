@@ -1,10 +1,20 @@
-window.game = new Phaser.Game
-#  width: 640
-#  height: 640
-  width: window.innerWidth    # values are overriden by update loop
-  height: window.innerHeight
+RogueHack =
+  CANVAS_WIDTH_INITIAL: 800
+  CANVAS_HEIGHT_INITIAL: 500
+  getViewportZoom: ->
+    console.log "RogueHack: debug viewport"
+    console.log "intended canvas width  : #{ RogueHack.CANVAS_WIDTH_INITIAL }px"
+    console.log "intended canvas height : #{ RogueHack.CANVAS_HEIGHT_INITIAL }px"
 
-  # zoom: 1
+    zoom = window.innerWidth / RogueHack.CANVAS_WIDTH_INITIAL
+    console.log "viewport width         : #{ window.innerWidth }px"
+    console.log "zoom                   : #{ zoom }x"
+    return zoom
+
+window.game = new Phaser.Game
+  width: RogueHack.CANVAS_WIDTH_INITIAL
+  height: RogueHack.CANVAS_HEIGHT_INITIAL
+  zoom: RogueHack.getViewportZoom()
   # resolution: 1
   # type: Phaser.AUTO
   # parent: null
