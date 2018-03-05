@@ -1,6 +1,9 @@
 window.game = new Phaser.Game
-  width: 640
-  height: 640
+#  width: 640
+#  height: 640
+  width: window.innerWidth
+  height: window.innerHeight
+
   # zoom: 1
   # resolution: 1
   # type: Phaser.AUTO

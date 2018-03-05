@@ -12,8 +12,11 @@ module.exports =
     return
 
   create: ->
-#    @scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-#    @scale.setScreenSize(true);
+
+    #Does this work??
+#    window.onresize = () =>
+#      window.game.renderer.resize(window.innerWidth, window.innerHeight, 1.0);
+#      console.log "Resized #{ window.innerWidth } - #{ window.innerHeight }"
 
     @scene.start 'menu'
     return
