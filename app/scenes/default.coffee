@@ -35,3 +35,4 @@ module.exports =
     quit: ->
       @scene.start 'menu', score: @score
       return
+

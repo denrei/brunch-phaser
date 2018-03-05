@@ -1,6 +1,6 @@
 window.game = new Phaser.Game
-  width: 800
-  height: 600
+  width: 640
+  height: 640
   # zoom: 1
   # resolution: 1
   # type: Phaser.AUTO
@@ -51,4 +51,5 @@ window.game = new Phaser.Game
     require('scenes/boot')
     require('scenes/default')
     require('scenes/menu')
+    require('scenes/navigation')
   ]

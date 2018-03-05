@@ -6,16 +6,15 @@ module.exports =
 
   init: (data) ->
     @highScore = data.score or 0
-    return
 
   create: ->
     sky = @add.image 400, 300, 'sky'
     sky.alpha = 0.25
-    @add.text(400, 300, 'START',
+    @add.text(0, 0, 'ROGUEHACK NOW',
       fill: 'white'
       fontFamily: FONT
       fontSize: 48)
-      .setOrigin(0.5)
+      .setOrigin(0.0)
       .setShadow 0, 1, '#62F6FF', 10
     @add.text(400, 450, 'High Score: ' + @highScore,
       fill: '#FED141'
@@ -23,13 +22,15 @@ module.exports =
       fontSize: 24)
       .setOrigin(0.5)
       .setShadow 0, 1, 'black', 5
-    @input.on 'pointerup', @start, this
-    return
+
+    startNav = () =>
+      @scene.start 'navigation', today: (new Date).toString()
+    @input.on 'pointerup', startNav
+
+    #TODO Keyboard presses are broken on itch.io ??
+    @input.keyboard.once 'keydown_D', () =>
+      @scene.start 'default', today: (new Date).toString(), this
+    @input.keyboard.once 'keydown_N', startNav
 
   extend:
-
     highScore: 0
-
-    start: ->
-      @scene.start 'default', today: (new Date).toString()
-      return
