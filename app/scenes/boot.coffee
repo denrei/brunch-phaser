@@ -1,10 +1,8 @@
 RogueHack =
   resizeCanvas: ->
-    canvasX = 1024
-    canvasY = 768
-    if window.innerWidth < canvasX
-      canvasX = 480
-      canvasY = 320
+    aspectRatio = 1.6
+    canvasX = window.innerWidth
+    canvasY = canvasX / aspectRatio
     window.game.renderer.resize(canvasX, canvasY, 1.0);
     console.log "Resized #{ game.canvas.width } x #{ game.canvas.height }"
 
