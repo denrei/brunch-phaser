@@ -48,7 +48,7 @@ module.exports =
 
     textConsoleX = -50
     textConsoleY = game.canvas.width - 200
-    textConsole = @add.image textConsoleX, textConsoleY, 'cmdprompt'
+    textConsole = @add.image textConsoleX, textConsoleY, 'console'
     textConsole.alpha = 0.6
     RogueHack.displayMessage(this, textConsole, 'Character: Hello world? That sounds familiar.')
 
