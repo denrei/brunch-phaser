@@ -1,7 +1,7 @@
 window.game = new Phaser.Game
 #  width: 640
 #  height: 640
-  width: window.innerWidth
+  width: window.innerWidth    # values are overriden by update loop
   height: window.innerHeight
 
   # zoom: 1
@@ -11,8 +11,8 @@ window.game = new Phaser.Game
   # canvas: null
   # canvasStyle: null
   # seed: null
-  title: '☕️ Brunch with Phaser'
-  url: 'https://github.com/samme/brunch-phaser'
+  title: 'RogueHack'
+  url: 'https://github.com/denrei/roguehack'
   version: '0.0.1'
   # input:
   #   keyboard: on

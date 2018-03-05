@@ -1,13 +1,6 @@
 RogueHack =
-  displayMessage: (phaserlib, textConsole, message) ->
-    console.log(message)
-    messageX = textConsole.x - (textConsole.width / 2) + 10
-    messageY = textConsole.y - (textConsole.height / 2) + 60
-    currentMessage = phaserlib.add.text messageX, messageY, message,
-      fill: 'lime',
-      fontSize: 24,
-      fontWeight: 'bold',
-    currentMessage.setShadow 0, 1, '#888', 10
+  displayMessage: (message) ->
+    console.log('(game message) ' + message)
 
 module.exports =
 
@@ -46,11 +39,7 @@ module.exports =
     @add.image 384, -128, 'wall'
     @add.image 128*4, -128, 'wall'
 
-    textConsoleX = -50
-    textConsoleY = game.canvas.width - 200
-    textConsole = @add.image textConsoleX, textConsoleY, 'console'
-    textConsole.alpha = 0.6
-    RogueHack.displayMessage(this, textConsole, 'Character: Hello world? That sounds familiar.')
+    RogueHack.displayMessage('Character: Hello world? That sounds familiar.')
 
     @playerSprite = @add.image 0, 0, 'red'
 
@@ -65,7 +54,7 @@ module.exports =
     #update player position
     clampSpeed = (d, max) =>
       return d
-      return Phaser.Math.Clamp(d, -@MaxSpeed, @MaxSpeed)
+      # return Phaser.Math.Clamp(d, -@MaxSpeed, @MaxSpeed)
 
     @playerSprite.x += clampSpeed (@navLocation.x - @playerSprite.x) * @MoveLerp * dt
     @playerSprite.y += clampSpeed (@navLocation.y - @playerSprite.y) * @MoveLerp * dt

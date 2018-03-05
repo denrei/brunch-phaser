@@ -1,3 +1,13 @@
+RogueHack =
+  resizeCanvas: ->
+    canvasX = 1024
+    canvasY = 768
+    if window.innerWidth < canvasX
+      canvasX = 480
+      canvasY = 320
+    window.game.renderer.resize(canvasX, canvasY, 1.0);
+    console.log "Resized #{ game.canvas.width } x #{ game.canvas.height }"
+
 module.exports =
 
   key: 'boot'
@@ -14,10 +24,9 @@ module.exports =
 
   create: ->
 
-    #Does this work??
-#    window.onresize = () =>
-#      window.game.renderer.resize(window.innerWidth, window.innerHeight, 1.0);
-#      console.log "Resized #{ window.innerWidth } - #{ window.innerHeight }"
+    window.onresize = () =>
+      RogueHack.resizeCanvas()
+    RogueHack.resizeCanvas()
 
     @scene.start 'menu'
     return
