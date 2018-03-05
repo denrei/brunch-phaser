@@ -12,6 +12,9 @@ module.exports =
     return
 
   create: ->
+#    @scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+#    @scale.setScreenSize(true);
+
     @scene.start 'menu'
     return
 
