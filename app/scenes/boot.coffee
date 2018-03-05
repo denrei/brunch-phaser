@@ -6,6 +6,7 @@ module.exports =
     @load.image 'sky', 'space3.png'
     @load.image 'logo', 'phaser3-logo.png'
     @load.image 'red', 'red.png'
+    @load.image 'console', 'cmdprompt.gif'
     @load.on 'progress', @onLoadProgress, this
     @load.on 'complete', @onLoadComplete, this
     @createProgressBar()
