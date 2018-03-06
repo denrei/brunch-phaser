@@ -77,17 +77,6 @@ module.exports =
         tile.physics.matterBody.body.label = 'dangerousTile'
       return
 
-    RogueHack.displayGameMessage(this, 'Watson: Hello world.')
-
-    stickyText = @add.text(16, 16, 'This sticks with camera?',
-      fontSize: '18px'
-      padding:
-        x: 10
-        y: 5
-      backgroundColor: '#ffffff'
-      fill: '#000000')
-    stickyText.setScrollFactor 0
-
     @playerSprite = @add.image 0, 0, 'red'
 
     @matterPlayer = @matter.add.image 256, 256, 'red'

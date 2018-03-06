@@ -1,9 +1,3 @@
-RogueHack =
-  hasViewportResized: false
-  handleResize: ->
-    if !RogueHack.hasViewportResized
-      RogueHack.hasViewportResized = true
-      console.error 'RogueHack: viewport resized! zoom now incorrect. refresh page for correct zoom.'
 module.exports =
 
   key: 'boot'
@@ -19,19 +13,12 @@ module.exports =
     return
 
   create: ->
-
-    window.onresize = () =>
-      RogueHack.handleResize()
-
     @scene.start 'menu'
     return
 
   extend:
-
     progressBar: null
-
     progressBarRectangle: null
-
     createProgressBar: ->
       main = @cameras.main
       @progressBarRectangle = new (Phaser.Geom.Rectangle)(0, 0, 0.5 * main.width, 50)
