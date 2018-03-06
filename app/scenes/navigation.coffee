@@ -17,8 +17,8 @@ module.exports =
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
 
-    @load.tilemapTiledJSON('map', 'rl_tilemap_01_tileSetEmbedded.json');
-    @load.image('rl_tilemap_01', 'RL_tiles_01.png');
+    @load.tilemapTiledJSON('map', 'rl_tilemap_8x8.json');
+    @load.image('rl_tilemap_02', 'rl_tiles_02.png');
 
   create: ->
 
