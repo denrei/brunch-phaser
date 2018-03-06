@@ -67,7 +67,12 @@ window.game = new Phaser.Game
     # crossOrigin: 'anonymous'
     # timeout: 0
   physics:
-    default: 'arcade'
+    default: 'matter'
+    matter:
+      gravity:
+        y: 1
+      enableSleep : true
+
     arcade:
       gravity:
         y: 180
