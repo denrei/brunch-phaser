@@ -69,6 +69,8 @@ module.exports =
 #        tile.physics.matterBody.body.label = 'dangerousTile'
 #      return
 
+    RogueHack.testAlibiMessages()
+
     @playerSprite = @add.image 0, 0, 'red'
 
     @matterPlayer = @matter.add.image 256, 256, 'red'
@@ -81,8 +83,6 @@ module.exports =
         x: pointer.x + cam.scrollX
         y: pointer.y + cam.scrollY
       console.log @navLocation
-      debugMessage = "move to: " + parseInt(@navLocation.x) + "," + parseInt(@navLocation.y)
-      RogueHack.displayGameMessage(this, debugMessage)
 
   update: (timestep, dt) ->
     if @keys.up.isDown
