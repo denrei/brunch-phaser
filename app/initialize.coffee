@@ -78,7 +78,6 @@ window.game = new Phaser.Game
         y: 180
   scene: [
     require('scenes/boot')
-    require('scenes/default')
     require('scenes/menu')
     require('scenes/navigation')
   ]
