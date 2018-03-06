@@ -31,7 +31,7 @@ module.exports =
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
 
     @load.tilemapTiledJSON('map', 'tileset-collision-shapes.json');
-    @load.image('kenny_platformer_64x64', 'kenny_platformer_32x32.png');
+    @load.image('kenny_platformer_64x64', 'kenny_platformer_64x64.png');
 
   create: ->
 #    @add.image 0,0, 'tile'
@@ -62,8 +62,13 @@ module.exports =
     # body will be accessible via tile.physics.matterBody.
     @matter.world.convertTilemapLayer layer
     @matter.world.setBounds map.widthInPixels, map.heightInPixels
+
+    @matter.world.createDebugGraphic()
+    @matter.world.drawDebug = true
+
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
+
     # Change the label of the Matter body on the tiles that should kill the bouncing balls. This
     # makes it easier to check Matter collisions.
     layer.forEachTile (tile) ->
@@ -83,7 +88,11 @@ module.exports =
       fill: '#000000')
     stickyText.setScrollFactor 0
 
-    @playerSprite = @add.image 0, 0, 'red' # @matter.add.image 0, 0, 'red'
+    @playerSprite = @add.image 0, 0, 'red'
+
+    @matterPlayer = @matter.add.image 256, 256, 'red'
+
+    @keys = @input.keyboard.createCursorKeys()
 
     @input.on 'pointerdown', (pointer) =>
       cam = pointer.camera
@@ -95,6 +104,15 @@ module.exports =
       RogueHack.displayGameMessage(this, debugMessage)
 
   update: (timestep, dt) ->
+    if @keys.up.isDown
+      @matterPlayer.setVelocityY(-5)
+    if @keys.down.isDown
+      @matterPlayer.setVelocityY(5)
+    if @keys.left.isDown
+      @matterPlayer.setVelocityX(-5)
+    if @keys.right.isDown
+      @matterPlayer.setVelocityX(5)
+
     #update player position
     clampSpeed = (d, max) =>
       return d
