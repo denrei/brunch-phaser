@@ -21,37 +21,9 @@ module.exports =
     @load.image('rl_tilemap_01', 'RL_tiles_01.png');
 
   create: ->
-#    @add.image 0,0, 'tile'
-#    @add.image -128,0, 'tile'
-#    @add.image 0, -128, 'tile'
-#    @add.image -128, -128, 'tile'
-#
-#    @add.image 128,0, 'tilex'
-#    @add.image 256,0, 'tilex'
-#    @add.image 0,128, 'tiley'
-#    @add.image 0,256, 'tiley'
-#
-#    @add.image 384,0, 'tile'
-#    @add.image 0,384, 'tile'
-#
-#    @add.image 128, -128, 'wall'
-#    @add.image 256, -128, 'wall1'
-#    @add.image 384, -128, 'wall'
-#    @add.image 128*4, -128, 'wall'
 
     map = @make.tilemap(key: 'map')
     tileset = map.addTilesetImage('rl_tilemap_01')
-
-#    layer = map.createDynamicLayer(0, tileset, 0, 0)
-    # Set colliding tiles before converting the layer to Matter bodies!
-#    layer.setCollisionByProperty collision: true  ##not collides
-
-
-    # Convert the layer. Any colliding tiles will be given a Matter body. If a tile has collision
-    # shapes from Tiled, these will be loaded. If not, a default rectangle body will be used. The
-    # body will be accessible via tile.physics.matterBody.
-#    @matter.world.convertTilemapLayer layer
-
 
     @matter.world.setBounds map.widthInPixels, map.heightInPixels
 
@@ -60,14 +32,6 @@ module.exports =
 
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
-
-    # Change the label of the Matter body on the tiles that should kill the bouncing balls. This
-    # makes it easier to check Matter collisions.
-#    layer.forEachTile (tile) ->
-#    # In Tiled, the platform tiles have been given a "type" property which is a string
-#      if tile.properties.type == 'lava' or tile.properties.type == 'spike'
-#        tile.physics.matterBody.body.label = 'dangerousTile'
-#      return
 
     RogueHack.testAlibiMessages()
 
@@ -97,7 +61,6 @@ module.exports =
     #update player position
     clampSpeed = (d, max) =>
       return d
-      # return Phaser.Math.Clamp(d, -@MaxSpeed, @MaxSpeed)
 
     @playerSprite.x += clampSpeed (@navLocation.x - @playerSprite.x) * @MoveLerp * dt
     @playerSprite.y += clampSpeed (@navLocation.y - @playerSprite.y) * @MoveLerp * dt
