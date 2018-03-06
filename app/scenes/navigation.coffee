@@ -17,14 +17,22 @@ module.exports =
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
     @load.tilemapTiledJSON('map', 'rl_tilemap_8x8.json');
-    @load.image('rl_tileset_02', 'rl_tiles_02.png');
+    @load.image('tiles', 'rl_tiles_02.png');
     return this
 
 
   create: ->
 
     map = @make.tilemap(key: 'map')
-    tileset = map.addTilesetImage('rl_tileset_02')
+    tileset = map.addTilesetImage('rl_tileset_02', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
+    # console.log(tileset)
+
+    layer = map.createStaticLayer(0, tileset, 0, 0); # Essential (apparently..)
+
+    # layer.setCollisionFromCollisionGroup(); # Set Collision From Tiled Collision Editor Data
+    layer.setCollisionByProperty({ collides: true });
+
+    @matter.world.convertTilemapLayer(layer);
 
     @matter.world.setBounds map.widthInPixels, map.heightInPixels
 
