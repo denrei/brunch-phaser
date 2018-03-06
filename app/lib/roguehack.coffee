@@ -8,7 +8,7 @@ module.exports =
     CANVAS_WIDTH_INITIAL: secretStuff.CANVAS_WIDTH_INITIAL
     CANVAS_HEIGHT_INITIAL: secretStuff.CANVAS_HEIGHT_INITIAL
     KEY_FILE_ALIBI: 'file-alibi'
-    PATH_DATA: '../data/'
+    PATH_DATA: '../../data/'
 
     stickyText: null
 

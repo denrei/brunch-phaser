@@ -16,14 +16,15 @@ module.exports =
     @load.image 'tiley', 'street_yTiling.png'
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
-
     @load.tilemapTiledJSON('map', 'rl_tilemap_8x8.json');
-    @load.image('rl_tilemap_02', 'rl_tiles_02.png');
+    @load.image('rl_tileset_02', 'rl_tiles_02.png');
+    return this
+
 
   create: ->
 
     map = @make.tilemap(key: 'map')
-    tileset = map.addTilesetImage('rl_tilemap_01')
+    tileset = map.addTilesetImage('rl_tileset_02')
 
     @matter.world.setBounds map.widthInPixels, map.heightInPixels
 
