@@ -30,8 +30,8 @@ module.exports =
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
 
-    @load.tilemapTiledJSON('map', 'tileset-collision-shapes.json');
-    @load.image('kenny_platformer_64x64', 'kenny_platformer_64x64.png');
+    @load.tilemapTiledJSON('map', 'rl_tilemap_01_tileSetEmbedded.json');
+    @load.image('worldImage', 'RL_tiles_01.png');
 
   create: ->
 #    @add.image 0,0, 'tile'
@@ -53,14 +53,19 @@ module.exports =
 #    @add.image 128*4, -128, 'wall'
 
     map = @make.tilemap(key: 'map')
-    tileset = map.addTilesetImage('kenny_platformer_64x64')
-    layer = map.createDynamicLayer(0, tileset, 0, 0)
+    tileset = map.addTilesetImage('worldImage')
+
+#    layer = map.createDynamicLayer(0, tileset, 0, 0)
     # Set colliding tiles before converting the layer to Matter bodies!
-    layer.setCollisionByProperty collides: true
+#    layer.setCollisionByProperty collision: true  ##not collides
+
+
     # Convert the layer. Any colliding tiles will be given a Matter body. If a tile has collision
     # shapes from Tiled, these will be loaded. If not, a default rectangle body will be used. The
     # body will be accessible via tile.physics.matterBody.
-    @matter.world.convertTilemapLayer layer
+#    @matter.world.convertTilemapLayer layer
+
+
     @matter.world.setBounds map.widthInPixels, map.heightInPixels
 
     @matter.world.createDebugGraphic()
@@ -71,11 +76,11 @@ module.exports =
 
     # Change the label of the Matter body on the tiles that should kill the bouncing balls. This
     # makes it easier to check Matter collisions.
-    layer.forEachTile (tile) ->
-    # In Tiled, the platform tiles have been given a "type" property which is a string
-      if tile.properties.type == 'lava' or tile.properties.type == 'spike'
-        tile.physics.matterBody.body.label = 'dangerousTile'
-      return
+#    layer.forEachTile (tile) ->
+#    # In Tiled, the platform tiles have been given a "type" property which is a string
+#      if tile.properties.type == 'lava' or tile.properties.type == 'spike'
+#        tile.physics.matterBody.body.label = 'dangerousTile'
+#      return
 
     RogueHack.displayGameMessage(this, 'Watson: Hello world.')
 
