@@ -1,17 +1,4 @@
-RogueHack =
-  stickyText: null
-  displayGameMessage: (phaserReference, message) ->
-    if this.stickyText
-      this.stickyText.destroy()
-    this.stickyText = phaserReference.add.text(16, 16, message,
-      fontSize: '18px'
-      padding:
-        x: 10
-        y: 5
-      backgroundColor: '#ffffff'
-      fill: '#000000')
-    this.stickyText.setScrollFactor 0
-
+RogueHack = require('lib/roguehack').RogueHack
 module.exports =
 
   key: 'navigation'

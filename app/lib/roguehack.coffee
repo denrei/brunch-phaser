@@ -9,6 +9,8 @@ module.exports =
 
     CANVAS_HEIGHT_INITIAL: secretStuff.CANVAS_HEIGHT_INITIAL
 
+    stickyText: null
+
     getViewportZoom: ->
       console.log "RogueHack: debug viewport"
       console.log "intended canvas width  : #{ secretStuff.CANVAS_WIDTH_INITIAL }px"
@@ -28,3 +30,15 @@ module.exports =
       console.log "viewport height        : #{ window.innerHeight }px"
       console.log "zoom                   : #{ zoom }x"
       return zoom
+
+    displayGameMessage: (phaserReference, message) ->
+      if this.stickyText
+        this.stickyText.destroy()
+      this.stickyText = phaserReference.add.text(16, 16, message,
+        fontSize: '18px'
+        padding:
+          x: 10
+          y: 5
+        backgroundColor: '#ffffff'
+        fill: '#000000')
+      this.stickyText.setScrollFactor 0
