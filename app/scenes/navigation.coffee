@@ -18,7 +18,7 @@ module.exports =
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
 
     @load.tilemapTiledJSON('map', 'rl_tilemap_01_tileSetEmbedded.json');
-    @load.image('worldImage', 'RL_tiles_01.png');
+    @load.image('rl_tilemap_01', 'RL_tiles_01.png');
 
   create: ->
 #    @add.image 0,0, 'tile'
@@ -40,7 +40,7 @@ module.exports =
 #    @add.image 128*4, -128, 'wall'
 
     map = @make.tilemap(key: 'map')
-    tileset = map.addTilesetImage('worldImage')
+    tileset = map.addTilesetImage('rl_tilemap_01')
 
 #    layer = map.createDynamicLayer(0, tileset, 0, 0)
     # Set colliding tiles before converting the layer to Matter bodies!
