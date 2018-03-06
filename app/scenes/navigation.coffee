@@ -72,7 +72,7 @@ module.exports =
         tile.physics.matterBody.body.label = 'dangerousTile'
       return
 
-    RogueHack.displayGameMessage('Watson: Hello world.')
+    RogueHack.displayGameMessage(this, 'Watson: Hello world.')
 
     stickyText = @add.text(16, 16, 'This sticks with camera?',
       fontSize: '18px'
@@ -83,7 +83,7 @@ module.exports =
       fill: '#000000')
     stickyText.setScrollFactor 0
 
-    @playerSprite = @matter.add.image 0, 0, 'red' # @add.image 0, 0, 'red'
+    @playerSprite = @add.image 0, 0, 'red' # @matter.add.image 0, 0, 'red'
 
     @input.on 'pointerdown', (pointer) =>
       cam = pointer.camera
