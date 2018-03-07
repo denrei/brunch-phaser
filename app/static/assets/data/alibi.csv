@@ -1,6 +1,6 @@
 id_alibi,message_suspect,id_witness1,message_confirm_witness1,message_unclear_witness1
 DRINKING,I was drinking at the bar.,BARTENDER,Yeah| %s was here all night. Vulgar as ever.  ,%s is a regular but| I haven't seen %s for weeks.
-GAMBLING,I was gambling with some buddies.,FRIEND,Yeah| %s was there but| keep that under your hat.  ,%s never showed up.  Said they had a way to make REAL money.  
+GAMBLING,I was gambling with some buddies.,FRIEND,Yeah| %s was there but| keep that under your hat.  ,%s never showed up.  Said they had a way to make REAL money.
 DINNER_AT_HOME,I was at home having dinner with my family.,SPOUSE,We had dinner and called it a night.  Nothing Exciting... never is...,No| and I'm not gonna to lie for %s anymore!
 WORKING_LATE,I had to work at the lab pretty late that night.  ,DESK_SECURITY,Yup| here's %s sign in log for that day.  Here all night...,"Let's see... %s signed in... 9AM but, never signed out.  That's weird."
-WONT_SAY,"None of your business!  But, I was headed to midtown",TRAFFIC_CAM,Camera shows %s car at the time %s said,Camera shows %s going the opposite direction towards the crime scene.  
+WONT_SAY,"None of your business!  But, I was headed to midtown",TRAFFIC_CAM,Camera shows %s car at the time %s said,Camera shows %s going the opposite direction towards the crime scene.
