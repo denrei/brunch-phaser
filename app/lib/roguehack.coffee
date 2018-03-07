@@ -14,7 +14,7 @@ module.exports = class RogueHack
       console.log message
 
   getViewportZoom: ->
-gd    @log "intended canvas width  : #{ @CANVAS_WIDTH_INITIAL }px"
+    @log "intended canvas width  : #{ @CANVAS_WIDTH_INITIAL }px"
     @log "intended canvas height : #{ @CANVAS_HEIGHT_INITIAL }px"
 
     aspectRatio_intended = @CANVAS_WIDTH_INITIAL / @CANVAS_HEIGHT_INITIAL
