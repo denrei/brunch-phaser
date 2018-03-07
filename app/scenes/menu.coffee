@@ -16,12 +16,16 @@ module.exports =
       fontSize: 48)
       .setOrigin(0.0)
       .setShadow 0, 1, '#62F6FF', 10
-    @add.text(400, 450, 'High Score: ' + @highScore,
-      fill: '#FED141'
-      fontFamily: FONT
-      fontSize: 24)
-      .setOrigin(0.5)
-      .setShadow 0, 1, 'black', 5
+
+    showSmallText = (message, x, y) =>
+      @add.text(x, y, message,
+        fill: '#FED141'
+        fontFamily: FONT
+        fontSize: 24)
+        .setOrigin(0.5)
+        .setShadow 0, 1, 'black', 5
+
+    showSmallText('High Score: ' + @highScore, 400, 450)
 
     startNav = () =>
       @scene.start 'navigation', today: (new Date).toString()
