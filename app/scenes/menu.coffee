@@ -25,15 +25,15 @@ module.exports =
         .setOrigin(0)
         .setShadow 0, 1, 'black', 5
 
-    showSmallText('D: Dialog demo', 40, 390)
+    showSmallText('A: Alibi simulator', 40, 390)
     showSmallText('N: Player Navigation demo', 40, 420)
     showSmallText('High Score: ' + @highScore, 40, 450)
 
     startScene = (sceneKey) =>
       @scene.start sceneKey, today: (new Date).toString(), this
 
-    @input.keyboard.once 'keydown_D', =>
-      startScene('demo_dialog')
+    @input.keyboard.once 'keydown_A', =>
+      startScene('alibisimulator')
 
     @input.keyboard.once 'keydown_N', =>
       startScene('navigation')

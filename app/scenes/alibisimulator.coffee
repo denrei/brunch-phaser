@@ -1,15 +1,18 @@
 RogueHack = require('lib/roguehack')
+AlibiManager = require('lib/alibimanager')
 roguehack = new RogueHack
+alibiManager = new AlibiManager(roguehack)
+
 module.exports =
 
-  key: 'demo_dialog'
+  key: 'alibisimulator'
 
   preload: ->
     @load.text roguehack.KEY_FILE_ALIBI, roguehack.PATH_DATA + 'alibi.csv'
     return
 
   create: ->
-    roguehack.displayGameMessage(this,"Dialog Demo")
+    roguehack.displayGameMessage(this,"Alibi Simulator")
 
     @data_alibi_original = @cache.text.get(roguehack.KEY_FILE_ALIBI)
     roguehack.log @data_alibi_original
