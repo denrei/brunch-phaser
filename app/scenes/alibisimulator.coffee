@@ -1,7 +1,6 @@
-RogueHack = require('lib/roguehack')
 AlibiManager = require('lib/alibimanager')
+RogueHack = require('lib/roguehack')
 roguehack = new RogueHack
-alibiManager = new AlibiManager(roguehack)
 
 module.exports =
 
@@ -14,5 +13,6 @@ module.exports =
   create: ->
     roguehack.displayGameMessage(this,"Alibi Simulator")
 
+    alibiManager = new AlibiManager(this, roguehack)
     for line in alibiManager.getFileInputLines(this)
       roguehack.log line
