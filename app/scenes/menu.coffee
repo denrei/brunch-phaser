@@ -29,7 +29,7 @@ module.exports =
 
     #TODO Keyboard presses are broken on itch.io ??
     @input.keyboard.once 'keydown_D', () =>
-      @scene.start 'default', today: (new Date).toString(), this
+      @scene.start 'demo_dialog', today: (new Date).toString(), this
     @input.keyboard.once 'keydown_N', startNav
 
   extend:
