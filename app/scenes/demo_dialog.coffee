@@ -10,3 +10,13 @@ module.exports =
 
   create: ->
     roguehack.displayGameMessage(this,"Dialog Demo")
+
+    @data_alibi_original = @cache.text.get(roguehack.KEY_FILE_ALIBI)
+    roguehack.log @data_alibi_original
+    lines = @data_alibi_original.split("\n")
+    for line in lines
+      fields = line.split(',')
+      for field in fields
+        field = field.replace(@LITERAL_COMMA_PLACEHOLDER, ',')
+        roguehack.log field
+      roguehack.log "----"

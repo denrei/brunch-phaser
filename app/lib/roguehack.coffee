@@ -43,29 +43,3 @@ module.exports = class RogueHack
       backgroundColor: '#ffffff'
       fill: '#000000')
     @stickyText.setScrollFactor 0
-
-  testAlibiMessages: (phaserReference) ->
-    data_alibi = phaserReference.cache.text.get(@KEY_FILE_ALIBI)
-    @log data_alibi
-
-    data_alibi = data_alibi.split("\n")
-    for line in data_alibi
-      fields = line.split(',')
-      for field in fields
-        field = field.replace(@LITERAL_COMMA_PLACEHOLDER, ',')
-        @log field
-      @log "----"
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -43,8 +43,6 @@ module.exports =
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
 
-    roguehack.testAlibiMessages(this)
-
     @playerSprite = @add.image 0, 0, 'red'
 
     @matterPlayer = @matter.add.image 256, 256, 'red'
