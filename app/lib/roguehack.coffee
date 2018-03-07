@@ -4,13 +4,13 @@ module.exports = class RogueHack
   CANVAS_HEIGHT_INITIAL: 500
   DEBUG: true
   KEY_FILE_ALIBI: 'file-alibi'
-  PATH_DATA: '../../data/'
+  PATH_DATA: './data/'
 
   stickyText: null
 
   log: (message) ->
     if @DEBUG
-      console.log 'debug: ' + message
+      console.log message
 
   getViewportZoom: ->
     @log "intended canvas width  : #{ @CANVAS_WIDTH_INITIAL }px"
@@ -43,5 +43,6 @@ module.exports = class RogueHack
       fill: '#000000')
     @stickyText.setScrollFactor 0
 
-  testAlibiMessages: ->
-    @log 'testing alibi messages'
+  testAlibiMessages: (phaserReference) ->
+    data_alibi = phaserReference.cache.text.get(@KEY_FILE_ALIBI)
+    @log data_alibi
