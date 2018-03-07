@@ -15,7 +15,10 @@ module.exports =
 
     alibiManager = new AlibiManager(this, roguehack)
     for alibi in alibiManager.getAlibis()
-      messageToDisplay += alibi.getId() + "\n"
+      messageToDisplay += alibi.getId() + ": " + alibi.getMessage_Suspect() + "\n"
+      messageToDisplay += alibi.getId_Witness1() + ": " + alibi.getMessageConfirm_Witness1() + "\n"
+      messageToDisplay += alibi.getId_Witness1() + ": " + alibi.getMessageUnclear_Witness1() + "\n"
+      messageToDisplay += "\n"
       console.log messageToDisplay
 
     roguehack.displayGameMessage(this, messageToDisplay)

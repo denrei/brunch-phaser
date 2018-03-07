@@ -11,15 +11,15 @@ class Alibi
     return @id
 
   getMessage_Suspect: ->
-    return @id
+    return @message_suspect
 
   getId_Witness1: ->
-    return @id
+    return @id_witness1
 
   getMessageConfirm_Witness1: ->
-    return @id
+    return @message_confirm_witness1
 
-  getMesageUnclear_Witness1: ->
-    return @id
+  getMessageUnclear_Witness1: ->
+    return @message_unclear_witness1
 
 module.exports = Alibi
