@@ -17,8 +17,8 @@ module.exports =
     @load.image 'tiley', 'street_yTiling.png'
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
-    @load.tilemapTiledJSON('map', 'rl_tilemap_01_tileSetEmbedded.json');
-    @load.image('tiles', 'rl_tiles_01.png');
+    @load.tilemapTiledJSON 'map', roguehack.PATH_DATA + 'rl_tilemap_01_tileSetEmbedded.json'
+    @load.image 'tiles', 'rl_tiles_01.png'
     return this
 
 
