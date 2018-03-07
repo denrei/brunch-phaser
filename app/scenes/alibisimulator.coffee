@@ -14,5 +14,5 @@ module.exports =
     roguehack.displayGameMessage(this,"Alibi Simulator")
 
     alibiManager = new AlibiManager(this, roguehack)
-    for line in alibiManager.getFileInputLines(this)
-      roguehack.log line
+    for alibi in alibiManager.getAlibis()
+      roguehack.log alibi
