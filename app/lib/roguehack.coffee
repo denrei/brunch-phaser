@@ -4,6 +4,7 @@ module.exports = class RogueHack
   CANVAS_HEIGHT_INITIAL: 500
   DEBUG: true
   KEY_FILE_ALIBI: 'file-alibi'
+  LITERAL_COMMA_PLACEHOLDER: "|"
   PATH_DATA: './data/'
 
   stickyText: null
@@ -42,7 +43,3 @@ module.exports = class RogueHack
       backgroundColor: '#ffffff'
       fill: '#000000')
     @stickyText.setScrollFactor 0
-
-  testAlibiMessages: (phaserReference) ->
-    data_alibi = phaserReference.cache.text.get(@KEY_FILE_ALIBI)
-    @log data_alibi
