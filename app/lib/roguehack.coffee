@@ -4,6 +4,7 @@ module.exports = class RogueHack
   CANVAS_HEIGHT_INITIAL: 500
   DEBUG: true
   KEY_FILE_ALIBI: 'file-alibi'
+  LITERAL_COMMA_PLACEHOLDER: "|"
   PATH_DATA: './data/'
 
   stickyText: null
@@ -13,7 +14,7 @@ module.exports = class RogueHack
       console.log message
 
   getViewportZoom: ->
-    @log "intended canvas width  : #{ @CANVAS_WIDTH_INITIAL }px"
+gd    @log "intended canvas width  : #{ @CANVAS_WIDTH_INITIAL }px"
     @log "intended canvas height : #{ @CANVAS_HEIGHT_INITIAL }px"
 
     aspectRatio_intended = @CANVAS_WIDTH_INITIAL / @CANVAS_HEIGHT_INITIAL
@@ -46,3 +47,25 @@ module.exports = class RogueHack
   testAlibiMessages: (phaserReference) ->
     data_alibi = phaserReference.cache.text.get(@KEY_FILE_ALIBI)
     @log data_alibi
+
+    data_alibi = data_alibi.split("\n")
+    for line in data_alibi
+      fields = line.split(',')
+      for field in fields
+        field = field.replace(@LITERAL_COMMA_PLACEHOLDER, ',')
+        @log field
+      @log "----"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
