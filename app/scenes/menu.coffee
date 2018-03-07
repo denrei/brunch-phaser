@@ -22,10 +22,12 @@ module.exports =
         fill: '#FED141'
         fontFamily: FONT
         fontSize: 24)
-        .setOrigin(0.5)
+        .setOrigin(0)
         .setShadow 0, 1, 'black', 5
 
-    showSmallText('High Score: ' + @highScore, 400, 450)
+    showSmallText('D: Dialog demo', 40, 390)
+    showSmallText('N: Player Navigation demo', 40, 420)
+    showSmallText('High Score: ' + @highScore, 40, 450)
 
     startNav = () =>
       @scene.start 'navigation', today: (new Date).toString()
