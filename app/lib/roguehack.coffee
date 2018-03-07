@@ -1,3 +1,7 @@
+Function::property = (prop, desc) ->
+  Object.defineProperty @prototype, prop, desc
+
+
 module.exports = class RogueHack
 
   CANVAS_WIDTH_INITIAL: 800

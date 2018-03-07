@@ -23,7 +23,11 @@ class AlibiManager
     return lines_toReturn
 
   getAlibis: () ->
+    isHeaderLine = true
     for line in @_getFileInputLines()
+      if isHeaderLine
+        isHeaderLine = false
+        continue
       id = line[0]
       message_suspect = line[1]
       id_witness1 = line[2]

@@ -11,8 +11,11 @@ module.exports =
     return
 
   create: ->
-    roguehack.displayGameMessage(this,"Alibi Simulator")
+    messageToDisplay = ''
 
     alibiManager = new AlibiManager(this, roguehack)
     for alibi in alibiManager.getAlibis()
-      roguehack.log alibi
+      messageToDisplay += alibi.getId() + "\n"
+      console.log messageToDisplay
+
+    roguehack.displayGameMessage(this, messageToDisplay)
