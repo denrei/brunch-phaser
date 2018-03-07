@@ -29,14 +29,27 @@ module.exports =
     showSmallText('N: Player Navigation demo', 40, 420)
     showSmallText('High Score: ' + @highScore, 40, 450)
 
-    startNav = () =>
-      @scene.start 'navigation', today: (new Date).toString()
-    @input.on 'pointerup', startNav
+    startScene = (sceneKey) =>
+      @scene.start sceneKey, today: (new Date).toString(), this
 
-    #TODO Keyboard presses are broken on itch.io ??
-    @input.keyboard.once 'keydown_D', () =>
-      @scene.start 'demo_dialog', today: (new Date).toString(), this
-    @input.keyboard.once 'keydown_N', startNav
+    @input.keyboard.once 'keydown_D', =>
+      startScene('demo_dialog')
+
+    @input.keyboard.once 'keydown_N', =>
+      startScene('navigation')
 
   extend:
     highScore: 0
+
+
+
+
+
+
+
+
+
+
+
+
+
