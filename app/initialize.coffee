@@ -1,8 +1,9 @@
-RogueHack = require('lib/roguehack').RogueHack
+RogueHack = require('lib/roguehack')
+roguehack = new RogueHack
 window.game = new Phaser.Game
-  width: RogueHack.CANVAS_WIDTH_INITIAL
-  height: RogueHack.CANVAS_HEIGHT_INITIAL
-  zoom: RogueHack.getViewportZoom()
+  width: roguehack.CANVAS_WIDTH_INITIAL
+  height: roguehack.CANVAS_HEIGHT_INITIAL
+  zoom: roguehack.getViewportZoom()
   # resolution: 1
   # type: Phaser.AUTO
   # parent: null

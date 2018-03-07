@@ -1,4 +1,5 @@
-RogueHack = require('lib/roguehack').RogueHack
+RogueHack = require('lib/roguehack')
+roguehack = new RogueHack
 module.exports =
 
   key: 'navigation'
@@ -42,7 +43,7 @@ module.exports =
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
 
-    RogueHack.testAlibiMessages()
+    roguehack.testAlibiMessages()
 
     @playerSprite = @add.image 0, 0, 'red'
 

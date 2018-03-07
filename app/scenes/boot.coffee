@@ -1,4 +1,5 @@
-RogueHack = require('lib/roguehack').RogueHack
+RogueHack = require('lib/roguehack')
+roguehack = new RogueHack
 module.exports =
 
   key: 'boot'
@@ -7,7 +8,7 @@ module.exports =
     @load.image 'sky', 'space3.png'
     @load.image 'logo', 'phaser3-logo.png'
     @load.image 'red', 'red.png'
-    @load.text RogueHack.KEY_FILE_ALIBI, 'data/alibi.csv'
+    @load.text roguehack.KEY_FILE_ALIBI, 'data/alibi.csv'
     @load.on 'progress', @onLoadProgress, this
     @load.on 'complete', @onLoadComplete, this
     @createProgressBar()
