@@ -13,19 +13,20 @@ module.exports =
 
   preload: ->
     @load.image 'tile', 'street_X_YTiling.png'
+    @load.image 'girly', 'girly.gif'
     @load.image 'tilex', 'street_xTiling.png'
     @load.image 'tiley', 'street_yTiling.png'
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
-    @load.tilemapTiledJSON 'map', roguehack.PATH_DATA + 'rl_tilemap_01_tileSetEmbedded.json'
-    @load.image 'tiles', 'rl_tiles_01.png'
+    @load.tilemapTiledJSON 'map', 'rl_tilemap_8x8.json'
+    @load.image 'tiles', 'rl_tiles.png'
     return this
 
 
   create: ->
 
     map = @make.tilemap(key: 'map')
-    tileset = map.addTilesetImage('rl_tileset_01', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
+    tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
     # console.log(tileset)
 
     layer = map.createStaticLayer(0, tileset, 0, 0); # Essential (apparently..)
@@ -45,9 +46,8 @@ module.exports =
 
     roguehack.testAlibiMessages(this)
 
-    @playerSprite = @add.image 0, 0, 'red'
-
-    @matterPlayer = @matter.add.image 256, 256, 'red'
+    @playerSprite = @matter.add.image 0, 0, 'girly'
+    @playerSprite.setScale 0.1
 
     @keys = @input.keyboard.createCursorKeys()
 

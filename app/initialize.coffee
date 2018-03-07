@@ -48,7 +48,7 @@ window.game = new Phaser.Game
     default: 'matter'
     matter:
       gravity:
-        y: 1
+        y: 0
       enableSleep : true
 
     arcade:
