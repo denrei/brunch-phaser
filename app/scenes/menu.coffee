@@ -10,7 +10,7 @@ module.exports =
   create: ->
     sky = @add.image 400, 300, 'sky'
     sky.alpha = 0.25
-    @add.text(0, 0, 'ROGUEHACK NOW',
+    @add.text(0, 0, 'ROGUEHACK/ONE SHOT',
       fill: 'white'
       fontFamily: FONT
       fontSize: 48)
