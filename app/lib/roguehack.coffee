@@ -3,8 +3,6 @@ module.exports = class RogueHack
   CANVAS_WIDTH_INITIAL: 800
   CANVAS_HEIGHT_INITIAL: 500
   DEBUG: true
-  KEY_FILE_ALIBI: 'file-alibi'
-  LITERAL_COMMA_PLACEHOLDER: "|"
   PATH_DATA: './data/'
 
   stickyText: null

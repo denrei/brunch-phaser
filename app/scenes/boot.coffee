@@ -8,7 +8,7 @@ module.exports =
     @load.image 'sky', 'space3.png'
     @load.image 'logo', 'phaser3-logo.png'
     @load.image 'red', 'red.png'
-    @load.text roguehack.KEY_FILE_ALIBI, roguehack.PATH_DATA + 'alibi.csv'
+    @load.text 'file-alibi', roguehack.PATH_DATA + 'alibi.csv'
     @load.on 'progress', @onLoadProgress, this
     @load.on 'complete', @onLoadComplete, this
     @createProgressBar()
