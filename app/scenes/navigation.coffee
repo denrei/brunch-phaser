@@ -1,5 +1,6 @@
 RogueHack = require('lib/roguehack')
 roguehack = new RogueHack
+@navLocation = {} # Globalize @navLocation so that it can be refernced during Create() I'm sorryyyyy!
 module.exports =
 
   key: 'navigation'
@@ -56,6 +57,7 @@ module.exports =
 
     @playerSprite = @matter.add.sprite 256, 256, 'playerAnim'
 #    @playerSprite.play('idle-fwd');
+    #Set Initial Destination to Spawn Point
     @navLocation =
       x: @playerSprite.x
       y: @playerSprite.y
@@ -108,7 +110,24 @@ module.exports =
           @playerSprite.scaleX = 1
           @playerSprite.anims.play('walk_left')
 
+    # Idle Player and Stop Movement if Collision with Collision Tile
+    @matter.world.on('collisionstart', (event, bodyA, bodyB)->
+        #Detect if body has animations. Sometimes Player is bodyB.
+        # Other times player is Body A. (I dont't know why)
+        if bodyB.gameObject.anims
+          bodyB.gameObject.anims.play("idle_front")
+          @navLocation =
+            x: bodyB.gameObject.x
+            y: bodyB.gameObject.y
+        else
+          bodyA.gameObject.anims.play("idle_front")
+          @navLocation =
+            x: bodyA.gameObject.x
+            y: bodyA.gameObject.y
+    );
+
   update: (timestep, dt) ->
+    # console.log(@playerSprite.body.friction)
     xDistance = (@navLocation.x - @playerSprite.x) * @MoveSpeed * dt
     yDistance = (@navLocation.y - @playerSprite.y) * @MoveSpeed * dt
     @playerSprite.x += xDistance
