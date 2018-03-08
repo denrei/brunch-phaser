@@ -1,5 +1,6 @@
 RogueHack = require('lib/roguehack')
 roguehack = new RogueHack
+
 module.exports =
 
   key: 'boot'
@@ -8,7 +9,7 @@ module.exports =
     @load.image 'sky', 'space3.png'
     @load.image 'logo', 'phaser3-logo.png'
     @load.image 'red', 'red.png'
-    @load.text roguehack.KEY_FILE_ALIBI, roguehack.PATH_DATA + 'alibi.csv'
+    @load.text 'file-alibi', roguehack.PATH_DATA + 'alibi.csv'
     @load.on 'progress', @onLoadProgress, this
     @load.on 'complete', @onLoadComplete, this
     @createProgressBar()
@@ -29,7 +30,6 @@ module.exports =
       return
 
     onLoadComplete: (loader) ->
-      console.log 'onLoadComplete', loader
       @progressBar.destroy()
       return
 
@@ -37,5 +37,4 @@ module.exports =
       rect = @progressBarRectangle
       color = if @load.failed.size > 0 then 0xff2200 else 0xffffff
       @progressBar.clear().fillStyle(0x222222).fillRect(rect.x, rect.y, rect.width, rect.height).fillStyle(color).fillRect rect.x, rect.y, progress * rect.width, rect.height
-      console.log 'progress', progress
       return

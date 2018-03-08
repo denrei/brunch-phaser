@@ -58,5 +58,5 @@ window.game = new Phaser.Game
     require('scenes/boot')
     require('scenes/menu')
     require('scenes/navigation')
-    require('scenes/demo_dialog')
+    require('scenes/alibisimulator')
   ]

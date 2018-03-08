@@ -10,7 +10,7 @@ module.exports =
   create: ->
     sky = @add.image 400, 300, 'sky'
     sky.alpha = 0.25
-    @add.text(0, 0, 'ROGUEHACK NOW',
+    @add.text(0, 0, 'ROGUEHACK/ONE SHOT',
       fill: 'white'
       fontFamily: FONT
       fontSize: 48)
@@ -25,18 +25,31 @@ module.exports =
         .setOrigin(0)
         .setShadow 0, 1, 'black', 5
 
-    showSmallText('D: Dialog demo', 40, 390)
+    showSmallText('A: Alibi simulator', 40, 390)
     showSmallText('N: Player Navigation demo', 40, 420)
     showSmallText('High Score: ' + @highScore, 40, 450)
 
-    startNav = () =>
-      @scene.start 'navigation', today: (new Date).toString()
-    @input.on 'pointerup', startNav
+    startScene = (sceneKey) =>
+      @scene.start sceneKey, today: (new Date).toString(), this
 
-    #TODO Keyboard presses are broken on itch.io ??
-    @input.keyboard.once 'keydown_D', () =>
-      @scene.start 'demo_dialog', today: (new Date).toString(), this
-    @input.keyboard.once 'keydown_N', startNav
+    @input.keyboard.once 'keydown_A', =>
+      startScene('alibisimulator')
+
+    @input.keyboard.once 'keydown_N', =>
+      startScene('navigation')
 
   extend:
     highScore: 0
+
+
+
+
+
+
+
+
+
+
+
+
+
