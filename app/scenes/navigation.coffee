@@ -20,7 +20,7 @@ module.exports =
     @load.image 'tiley', 'street_yTiling.png'
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
-    @load.tilemapTiledJSON 'map', 'rl_tilemap_8x8.json'
+    @load.tilemapTiledJSON 'map', 'rl_tilemap.json'
     @load.image 'tiles', 'rl_tiles.png'
     return this
 
@@ -34,9 +34,12 @@ module.exports =
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
     #give it a layer w/ collision tiles
     layer = map.createStaticLayer(0, tileset, 0, 32)
+    layer2 = map.createStaticLayer(1, tileset, 0, 32)
     layer.setCollisionByProperty({ collides: true });
+    layer2.setCollisionByProperty({ collides: true });
 
     @matter.world.convertTilemapLayer(layer);
+    @matter.world.convertTilemapLayer(layer2);
 
     @matter.world.setBounds map.widthInPixels, map.heightInPixels
 
