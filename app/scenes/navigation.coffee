@@ -14,6 +14,7 @@ module.exports =
   preload: ->
     @load.image 'tile', 'street_X_YTiling.png'
     @load.image 'girly', 'girly.gif'
+    @load.image 'ton', 'ton_placeholder.png'
     @load.image 'bg_clouds', 'bg_clouds.png'
     @load.image 'tilex', 'street_xTiling.png'
     @load.image 'tiley', 'street_yTiling.png'
@@ -48,6 +49,9 @@ module.exports =
     @playerSprite = @matter.add.image 64, 196, 'girly'
     @playerSprite.setScale 0.1
 
+    @npcSprite01 = @matter.add.image 196, 230, 'ton'
+    @npcSprite01.body.isStatic = true
+
     @keys = @input.keyboard.createCursorKeys()
 
     @input.on 'pointerdown', (pointer) =>
@@ -56,12 +60,6 @@ module.exports =
         x: Math.floor(pointer.x + cam.scrollX)
         y: Math.floor(pointer.y + cam.scrollY)
       console.log @navLocation
-      # tween = this.tweens.add({
-      #   targets: @playerSprite,
-      #   x: 600,
-      #   ease: 'Power1',
-      #   duration: 3000
-      # });
 
   update: (timestep, dt) ->
     # if @keys.up.isDown
