@@ -53,19 +53,25 @@ module.exports =
     @input.on 'pointerdown', (pointer) =>
       cam = pointer.camera
       @navLocation =
-        x: pointer.x + cam.scrollX
-        y: pointer.y + cam.scrollY
+        x: Math.floor(pointer.x + cam.scrollX)
+        y: Math.floor(pointer.y + cam.scrollY)
       console.log @navLocation
+      # tween = this.tweens.add({
+      #   targets: @playerSprite,
+      #   x: 600,
+      #   ease: 'Power1',
+      #   duration: 3000
+      # });
 
   update: (timestep, dt) ->
-    if @keys.up.isDown
-      @matterPlayer.setVelocityY(-5)
-    if @keys.down.isDown
-      @matterPlayer.setVelocityY(5)
-    if @keys.left.isDown
-      @matterPlayer.setVelocityX(-5)
-    if @keys.right.isDown
-      @matterPlayer.setVelocityX(5)
+    # if @keys.up.isDown
+    #   @matterPlayer.setVelocityY(-5)
+    # if @keys.down.isDown
+    #   @matterPlayer.setVelocityY(5)
+    # if @keys.left.isDown
+    #   @matterPlayer.setVelocityX(-5)
+    # if @keys.right.isDown
+    #   @matterPlayer.setVelocityX(5)
 
     #update player position
     clampSpeed = (d, max) =>
@@ -82,8 +88,8 @@ module.exports =
     Phaser.Time.Clock
     #Follow player
     interp = Phaser.Math.Interpolation.Linear
-    scrollX = interp([cam.scrollX, camScrollTarget.x], @CameraFollowLerp)
-    scrollY = interp([cam.scrollY, camScrollTarget.y], @CameraFollowLerp)
+    scrollX = Math.floor(interp([cam.scrollX, camScrollTarget.x], @CameraFollowLerp))
+    scrollY = Math.floor(interp([cam.scrollY, camScrollTarget.y], @CameraFollowLerp))
     cam.setScroll(scrollX, scrollY)
 
   extend:
