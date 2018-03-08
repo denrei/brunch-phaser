@@ -7,9 +7,7 @@ module.exports =
   init: (data) ->
     console.log 'init', data, this
 
-    @navLocation =
-      x: 0
-      y: 0
+    @navLocation = new Phaser.Geom.Point()
 
   preload: ->
     @load.image 'tile', 'street_X_YTiling.png'
@@ -54,37 +52,42 @@ module.exports =
         frameRate: 8
         repeat: -1
 
-    createAnim 'walk_back', 3, 7
-    createAnim 'walk_fwd', 8, 12
-    createAnim 'walk_left', 13, 17
-
+    createAnim 'walk_back', 3, 6
+    createAnim 'walk_fwd', 8, 11
+    createAnim 'walk_left', 13, 16
     @playerSprite.anims.play('walk_left');
 
     @npcSprite01 = @matter.add.image 196, 230, 'ton'
     @npcSprite01.body.isStatic = true
 
     @keys = @input.keyboard.createCursorKeys()
-
     @input.on 'pointerdown', (pointer) =>
       cam = pointer.camera
-      @navLocation =
+      @navLocation = 
         x: Math.floor(pointer.x + cam.scrollX)
         y: Math.floor(pointer.y + cam.scrollY)
-      if @navLocation.y < @playerSprite.y
-        @playerSprite.anims.play('walk_back');
+      updateAnimation()
+
+    updateAnimation = =>
+      vert = (@navLocation.y - @playerSprite.y)
+      hori = (@navLocation.x - @playerSprite.x)
+      if vert * vert > hori * hori
+        if @navLocation.y < @playerSprite.y
+          @playerSprite.anims.play('walk_back')
+        else
+          @playerSprite.anims.play('walk_fwd')
       else
-        @playerSprite.anims.play('walk_fwd');
-      console.log @navLocation
+        if @navLocation.x < @playerSprite.x
+          @playerSprite.scaleX = -1
+          @playerSprite.anims.play('walk_left')
+        else
+          @playerSprite.scaleX = 1
+          @playerSprite.anims.play('walk_left')
 
   update: (timestep, dt) ->
 
-    clampSpeed = (val) =>
-      return  Phaser.Math.Clamp(val, -1, 1)
-
-    @playerSprite.x += clampSpeed (@navLocation.x - @playerSprite.x) * @MoveSpeed * dt
-    @playerSprite.y += clampSpeed (@navLocation.y - @playerSprite.y) * @MoveSpeed * dt
-    @playerSprite.x = Math.floor(@playerSprite.x)
-    @playerSprite.y = Math.floor(@playerSprite.y)
+    @playerSprite.x += (@navLocation.x - @playerSprite.x) * @MoveSpeed * dt
+    @playerSprite.y += (@navLocation.y - @playerSprite.y) * @MoveSpeed * dt
 
     cam = @cameras.main
     camScrollTarget =
@@ -109,10 +112,8 @@ module.exports =
   # if @keys.right.isDown
   #   @matterPlayer.setVelocityX(5)
 
-
   extend:
-    MoveSpeed: 100
-    MoveLerp: 0.00125
+    MoveSpeed: 0.001
     CameraFollowLerp: 0.02
 
     quit: ->
