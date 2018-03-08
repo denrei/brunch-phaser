@@ -31,8 +31,17 @@ module.exports =
     bgClouds.setScale 1.1
     #second create tile map
     map = @make.tilemap(key: 'map')
+
+    ton = {}
+    for e, i in map.objects[0].objects
+      if e.name == 'ton'
+        ton.x = e.x
+        ton.y = e.y
+
+    console.log(ton)
+
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
-    #give it a layer w/ collision tiles
+    #Create layer(s) w/ collision tiles
     layer = map.createStaticLayer(0, tileset, 0, 32)
     layer2 = map.createStaticLayer(1, tileset, 0, 32)
     layer.setCollisionByProperty({ collides: true });
@@ -52,8 +61,8 @@ module.exports =
     @playerSprite = @matter.add.image 64, 196, 'girly'
     @playerSprite.setScale 0.1
 
-    @npcSprite01 = @matter.add.image 196, 230, 'ton'
-    @npcSprite01.body.isStatic = true
+    @tonSprite = @matter.add.image ton.x, ton.y, 'ton'
+    @tonSprite.body.isStatic = true
 
     @keys = @input.keyboard.createCursorKeys()
 
