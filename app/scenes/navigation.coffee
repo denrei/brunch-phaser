@@ -19,7 +19,7 @@ module.exports =
     @load.image 'tiley', 'street_yTiling.png'
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
-    @load.tilemapTiledJSON 'map', 'rl_tilemap_8x8.json'
+    @load.tilemapTiledJSON 'map', 'rl_tilemap.json'
     @load.image 'tiles', 'rl_tiles.png'
 
   create: ->
@@ -28,12 +28,24 @@ module.exports =
     bgClouds.setScale 1.1
     #second create tile map
     map = @make.tilemap(key: 'map')
+
+    ton = {}
+    for e, i in map.objects[0].objects
+      if e.name == 'ton'
+        ton.x = e.x
+        ton.y = e.y
+
+    console.log(ton)
+
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
-    #give it a layer w/ collision tiles
+    #Create layer(s) w/ collision tiles
     layer = map.createStaticLayer(0, tileset, 0, 32)
+    layer2 = map.createStaticLayer(1, tileset, 0, 32)
     layer.setCollisionByProperty({ collides: true });
+    layer2.setCollisionByProperty({ collides: true });
 
     @matter.world.convertTilemapLayer(layer);
+    @matter.world.convertTilemapLayer(layer2);
 
     @matter.world.setBounds map.widthInPixels, map.heightInPixels
 
@@ -57,8 +69,12 @@ module.exports =
     createAnim 'walk_left', 13, 16
     @playerSprite.anims.play('walk_left');
 
-    @npcSprite01 = @matter.add.image 196, 230, 'ton'
-    @npcSprite01.body.isStatic = true
+    @tonSprite = @matter.add.image ton.x, ton.y, 'ton'
+    @tonSprite.body.isStatic = true
+
+    layer3 = map.createStaticLayer(2, tileset, 0, 32)
+    layer3.setCollisionByProperty({ collides: true })
+    @matter.world.convertTilemapLayer(layer3)
 
     @keys = @input.keyboard.createCursorKeys()
     @input.on 'pointerdown', (pointer) =>
