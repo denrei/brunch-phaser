@@ -4,8 +4,8 @@ Function::property = (prop, desc) ->
 
 module.exports = class RogueHack
 
-  CANVAS_WIDTH_INITIAL: 800
-  CANVAS_HEIGHT_INITIAL: 500
+  CANVAS_WIDTH_INITIAL: 640
+  CANVAS_HEIGHT_INITIAL: 640
   DEBUG: true
   PATH_DATA: './data/'
 
