@@ -16,23 +16,8 @@ module.exports = class RogueHack
       console.log message
 
   getViewportZoom: ->
-    @log "intended canvas width  : #{ @CANVAS_WIDTH_INITIAL }px"
-    @log "intended canvas height : #{ @CANVAS_HEIGHT_INITIAL }px"
-
-    aspectRatio_intended = @CANVAS_WIDTH_INITIAL / @CANVAS_HEIGHT_INITIAL
-    @log "intended aspect ratio  : #{ aspectRatio_intended }"
-
-    zoom = window.innerWidth / @CANVAS_WIDTH_INITIAL
-    @log "normally width is limiting"
-    aspectRatio_viewport = window.innerWidth / window.innerHeight
-    if aspectRatio_viewport > aspectRatio_intended
-      @log "but now height is limiting"
-      zoom = window.innerHeight / @CANVAS_HEIGHT_INITIAL
-
-    @log "viewport width         : #{ window.innerWidth }px"
-    @log "viewport height        : #{ window.innerHeight }px"
-    @log "zoom                   : #{ zoom }x"
-    return zoom
+    # it appears that itch.io, the eventual production environment, renders the game at 640x640.
+    return 1
 
   displayGameMessage: (phaserReference, message) ->
     if @stickyText
