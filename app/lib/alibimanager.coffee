@@ -38,6 +38,9 @@ class AlibiManager
       alibi = new Alibi(id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
       @alibis.push(alibi)
 
+  _getCapitalizedCharacterName: (name) ->
+    return name.toUpperCase()
+
   getAlibis: () ->
     return @alibis
 
@@ -52,7 +55,9 @@ class AlibiManager
     if typeof(collidedBody.gameObject.alibi) == 'undefined'
       @roguehack.displayGameMessage(@phaserInstance, message)
       return
-    message = collidedBody.gameObject.alibi.getMessage_Suspect()
+    message = ''
+    message += @_getCapitalizedCharacterName(collidedBody.gameObject.name) + ":\n"
+    message += collidedBody.gameObject.alibi.getMessage_Suspect()
     @roguehack.displayGameMessage(@phaserInstance, message)
 
 module.exports = AlibiManager

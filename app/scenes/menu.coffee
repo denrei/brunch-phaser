@@ -38,6 +38,9 @@ module.exports =
     @input.keyboard.once 'keydown_N', =>
       startScene('navigation')
 
+    @input.on 'pointerup', =>
+      startScene('navigation')
+
   extend:
     highScore: 0
 
