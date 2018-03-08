@@ -13,7 +13,8 @@ module.exports =
 
   preload: ->
     @load.image 'tile', 'street_X_YTiling.png'
-    @load.image 'girly', 'girly.gif'
+    @load.spritesheet('playerAnim', 'character/jen-spritesheet.png', { frameWidth: 12, frameHeight: 25, endFrame: 18 });
+
     @load.image 'ton', 'ton_placeholder.png'
     @load.image 'bg_clouds', 'bg_clouds.png'
     @load.image 'tilex', 'street_xTiling.png'
@@ -22,8 +23,6 @@ module.exports =
     @load.image 'wall', 'exteriorWall_southFacing_fullCollision.png'
     @load.tilemapTiledJSON 'map', 'rl_tilemap_8x8.json'
     @load.image 'tiles', 'rl_tiles.png'
-    return this
-
 
   create: ->
     #first create background
@@ -45,9 +44,21 @@ module.exports =
 
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
+    @playerSprite = @matter.add.sprite 256, 256, 'playerAnim'
+#    @playerSprite.play('idle-fwd');
 
-    @playerSprite = @matter.add.image 64, 196, 'girly'
-    @playerSprite.setScale 0.1
+    createAnim = (name, start, end ) =>
+      @anims.create
+        key: name
+        frames: @anims.generateFrameNumbers('playerAnim', { start: start, end: end })
+        frameRate: 8
+        repeat: -1
+
+    createAnim 'walk_back', 3, 7
+    createAnim 'walk_fwd', 8, 12
+    createAnim 'walk_left', 13, 17
+
+    @playerSprite.anims.play('walk_left');
 
     @npcSprite01 = @matter.add.image 196, 230, 'ton'
     @npcSprite01.body.isStatic = true
@@ -59,24 +70,21 @@ module.exports =
       @navLocation =
         x: Math.floor(pointer.x + cam.scrollX)
         y: Math.floor(pointer.y + cam.scrollY)
+      if @navLocation.y < @playerSprite.y
+        @playerSprite.anims.play('walk_back');
+      else
+        @playerSprite.anims.play('walk_fwd');
       console.log @navLocation
 
   update: (timestep, dt) ->
-    # if @keys.up.isDown
-    #   @matterPlayer.setVelocityY(-5)
-    # if @keys.down.isDown
-    #   @matterPlayer.setVelocityY(5)
-    # if @keys.left.isDown
-    #   @matterPlayer.setVelocityX(-5)
-    # if @keys.right.isDown
-    #   @matterPlayer.setVelocityX(5)
 
-    #update player position
-    clampSpeed = (d, max) =>
-      return d
+    clampSpeed = (val) =>
+      return  Phaser.Math.Clamp(val, -1, 1)
 
-    @playerSprite.x += clampSpeed (@navLocation.x - @playerSprite.x) * @MoveLerp * dt
-    @playerSprite.y += clampSpeed (@navLocation.y - @playerSprite.y) * @MoveLerp * dt
+    @playerSprite.x += clampSpeed (@navLocation.x - @playerSprite.x) * @MoveSpeed * dt
+    @playerSprite.y += clampSpeed (@navLocation.y - @playerSprite.y) * @MoveSpeed * dt
+    @playerSprite.x = Math.floor(@playerSprite.x)
+    @playerSprite.y = Math.floor(@playerSprite.y)
 
     cam = @cameras.main
     camScrollTarget =
@@ -90,8 +98,20 @@ module.exports =
     scrollY = Math.floor(interp([cam.scrollY, camScrollTarget.y], @CameraFollowLerp))
     cam.setScroll(scrollX, scrollY)
 
+  directionalMove: ->
+    return
+  # if @keys.up.isDown
+  #   @matterPlayer.setVelocityY(-5)
+  # if @keys.down.isDown
+  #   @matterPlayer.setVelocityY(5)
+  # if @keys.left.isDown
+  #   @matterPlayer.setVelocityX(-5)
+  # if @keys.right.isDown
+  #   @matterPlayer.setVelocityX(5)
+
+
   extend:
-    MaxSpeed: 100
+    MoveSpeed: 100
     MoveLerp: 0.00125
     CameraFollowLerp: 0.02
 
