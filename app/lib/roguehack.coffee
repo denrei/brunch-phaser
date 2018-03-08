@@ -1,7 +1,7 @@
 module.exports = class RogueHack
 
   CANVAS_WIDTH_INITIAL: 800
-  CANVAS_HEIGHT_INITIAL: 500
+  CANVAS_HEIGHT_INITIAL: 600
   DEBUG: true
   PATH_DATA: './data/'
   ID_NPC_TON: 'ton'

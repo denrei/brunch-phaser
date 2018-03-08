@@ -35,13 +35,14 @@ class AlibiManager
       message_unclear_witness1 = line[4]
       alibi = new Alibi(id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
       @alibis.push(alibi)
-
     return @alibis
 
-
   displayAlibiForBody: (collidedBody) ->
-    messageToDisplay = 'sup'
+    console.log 'checking alibi for collided body'
+    messageToDisplay = 'ouch'
+    if collidedBody.gameObject.name == @roguehack.ID_NPC_TON
+      messageToDisplay = 'hello I am ton'
+
     @roguehack.displayGameMessage(@phaserInstance, messageToDisplay)
-    console.log(messageToDisplay)
 
 module.exports = AlibiManager

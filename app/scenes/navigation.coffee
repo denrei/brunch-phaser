@@ -84,6 +84,7 @@ module.exports =
     # Create NPCs
     @tonSprite = @matter.add.image ton.x, ton.y, roguehack.ID_NPC_TON
     @tonSprite.body.isStatic = true
+    @tonSprite.name = roguehack.ID_NPC_TON
 
     # Create Top Level TileMap Layer (for objects that overlap NPCs)
     layer3 = map.createStaticLayer(2, tileset, 0, 32)
@@ -130,11 +131,11 @@ module.exports =
             x: bodyB.gameObject.x
             y: bodyB.gameObject.y
         else
-          alibiManager.displayAlibiForBody(bodyA)
+          alibiManager.displayAlibiForBody(bodyB)
           bodyA.gameObject.anims.play("idle_front")
           @navLocation =
             x: bodyA.gameObject.x
-          y: bodyA.gameObject.y
+            y: bodyA.gameObject.y
 
     )
 
