@@ -38,7 +38,7 @@ module.exports =
     @input.keyboard.once 'keydown_N', =>
       startScene('navigation')
 
-    @input.on 'pointerup', =>
+    @input.on 'pointerdown', =>
       startScene('navigation')
 
   extend:
