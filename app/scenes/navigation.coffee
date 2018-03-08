@@ -18,7 +18,10 @@ module.exports =
     @load.spritesheet('playerAnim', 'character/jen-spritesheet.png', { frameWidth: 12, frameHeight: 25, endFrame: 18 });
 
     @load.image roguehack.ID_NPC_DABYL, 'character/Dabyl-placeholder.png'
+    @load.image roguehack.ID_NPC_IVIKA, 'character/Ivika-placeholder.png'
+    @load.image roguehack.ID_NPC_SIVAN, 'character/Sivan-placeholder.png'
     @load.image roguehack.ID_NPC_TON, 'character/Ton-placeholder.png'
+    @load.image roguehack.ID_NPC_VERA, 'character/Vera-placeholder.png'
 
     @load.image 'bg_clouds', 'bg_clouds.png'
     @load.image 'tilex', 'street_xTiling.png'
@@ -38,18 +41,30 @@ module.exports =
 
     # Define NPC Objects
     alibiManager = new AlibiManager(this, roguehack)
-    dabyl = {}
-    ton = {}
+    npc_dabyl = {}
+    npc_ivika = {}
+    npc_sivan = {}
+    npc_ton = {}
+    npc_vera = {}
 
     # Loop Through Tile Map Object Layer. If Object Name matches (NPC) Game Object,
     # Assign TileMap Coordinates to Game Object Position
     for e, i in map.objects[0].objects
       if e.name == roguehack.ID_NPC_DABYL
-        dabyl.x = e.x
-        dabyl.y = e.y
+        npc_dabyl.x = e.x
+        npc_dabyl.y = e.y
+      else if e.name == roguehack.ID_NPC_IVIKA
+        npc_ivika.x = e.x
+        npc_ivika.y = e.y
+      else if e.name == roguehack.ID_NPC_SIVAN
+        npc_sivan.x = e.x
+        npc_sivan.y = e.y
       else if e.name == roguehack.ID_NPC_TON
-        ton.x = e.x
-        ton.y = e.y
+        npc_ton.x = e.x
+        npc_ton.y = e.y
+      else if e.name == roguehack.ID_NPC_VERA
+        npc_vera.x = e.x
+        npc_vera.y = e.y
 
     #Create layer(s) w/ collision tiles
     layer = map.createStaticLayer(0, tileset, 0, 32)
@@ -88,15 +103,16 @@ module.exports =
     createAnim 'walk_left', 13, 16
     @playerSprite.anims.play('idle_front');
 
-    # Create NPCs
     createNpcSprite = (image_id, alibiManager, x, y) =>
       npcSprite = @matter.add.image x, y, image_id
       npcSprite.body.isStatic = true
       npcSprite.name = image_id
       npcSprite.alibi = alibiManager.assignAlibi()
-
-    createNpcSprite(roguehack.ID_NPC_DABYL, alibiManager, dabyl.x, dabyl.y)
-    createNpcSprite(roguehack.ID_NPC_TON, alibiManager, ton.x, ton.y)
+    createNpcSprite(roguehack.ID_NPC_DABYL, alibiManager, npc_dabyl.x, npc_dabyl.y)
+    createNpcSprite(roguehack.ID_NPC_IVIKA, alibiManager, npc_ivika.x, npc_ivika.y)
+    createNpcSprite(roguehack.ID_NPC_SIVAN, alibiManager, npc_sivan.x, npc_sivan.y)
+    createNpcSprite(roguehack.ID_NPC_TON, alibiManager, npc_ton.x, npc_ton.y)
+    createNpcSprite(roguehack.ID_NPC_VERA, alibiManager, npc_vera.x, npc_vera.y)
 
     # Create Top Level TileMap Layer (for objects that overlap NPCs)
     layer3 = map.createStaticLayer(2, tileset, 0, 32)

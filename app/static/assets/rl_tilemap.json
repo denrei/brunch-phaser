@@ -27,27 +27,60 @@
          "draworder":"topdown",
          "name":"Object Layer 1",
          "objects":[
-            {
-             "height":12,
-             "id":1,
-             "name":"dabyl",
-             "rotation":0,
-             "type":"",
-             "visible":true,
-             "width":12,
-             "x":648,
-             "y":204
-            },
            {
-             "height":12,
-             "id":1,
-             "name":"ton",
-             "rotation":0,
-             "type":"",
-             "visible":true,
-             "width":12,
-             "x":748,
-             "y":204
+             "height": 12,
+             "id": 1,
+             "name": "dabyl",
+             "rotation": 0,
+             "type": "",
+             "visible": true,
+             "width": 12,
+             "x": 400,
+             "y": 195
+           },
+           {
+             "height": 12,
+             "id": 1,
+             "name": "ivika",
+             "rotation": 0,
+             "type": "",
+             "visible": true,
+             "width": 12,
+             "x": 500,
+             "y": 195
+           },
+           {
+             "height": 12,
+             "id": 1,
+             "name": "sivan",
+             "rotation": 0,
+             "type": "",
+             "visible": true,
+             "width": 12,
+             "x": 600,
+             "y": 195
+           },
+           {
+             "height": 12,
+             "id": 1,
+             "name": "ton",
+             "rotation": 0,
+             "type": "",
+             "visible": true,
+             "width": 12,
+             "x": 700,
+             "y": 195
+           },
+           {
+             "height": 12,
+             "id": 1,
+             "name": "vera",
+             "rotation": 0,
+             "type": "",
+             "visible": true,
+             "width": 12,
+             "x": 800,
+             "y": 195
            }
          ],
          "opacity":1,
