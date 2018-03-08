@@ -27,17 +27,29 @@
          "draworder":"topdown",
          "name":"Object Layer 1",
          "objects":[
-                {
-                 "height":12,
-                 "id":1,
-                 "name":"ton",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":12,
-                 "x":748,
-                 "y":204
-                }],
+            {
+             "height":12,
+             "id":1,
+             "name":"dabyl",
+             "rotation":0,
+             "type":"",
+             "visible":true,
+             "width":12,
+             "x":648,
+             "y":204
+            },
+           {
+             "height":12,
+             "id":1,
+             "name":"ton",
+             "rotation":0,
+             "type":"",
+             "visible":true,
+             "width":12,
+             "x":748,
+             "y":204
+           }
+         ],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,

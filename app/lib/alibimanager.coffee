@@ -4,10 +4,12 @@ class AlibiManager
   COMMA_PLACEHOLDER: "|"
   NEWLINE: "\r\n" # thanks Google Drive
   alibis: []
+  count_assigned_abilis: 0
 
   constructor: (phaserInstance, roguehack)->
     @phaserInstance = phaserInstance
     @roguehack = roguehack
+    @_initializeAlibis()
 
   _getFileInputLines: () ->
     @data_alibi_original = @phaserInstance.cache.text.get('file-alibi')
@@ -22,7 +24,7 @@ class AlibiManager
       lines_toReturn.push(line_toReturn)
     return lines_toReturn
 
-  getAlibis: () ->
+  _initializeAlibis: () ->
     isHeaderLine = true
     for line in @_getFileInputLines()
       if isHeaderLine
@@ -35,14 +37,22 @@ class AlibiManager
       message_unclear_witness1 = line[4]
       alibi = new Alibi(id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
       @alibis.push(alibi)
+
+  getAlibis: () ->
     return @alibis
 
-  displayAlibiForBody: (collidedBody) ->
-    console.log 'checking alibi for collided body'
-    messageToDisplay = 'ouch'
-    if collidedBody.gameObject.name == @roguehack.ID_NPC_TON
-      messageToDisplay = 'hello I am ton'
+  assignAlibi: ->
+    alibiToReturn = @alibis[@count_assigned_abilis]
+    @count_assigned_abilis += 1
+    return alibiToReturn
 
-    @roguehack.displayGameMessage(@phaserInstance, messageToDisplay)
+  displayAlibiForBody: (collidedBody) ->
+    message = 'ouch'
+    @roguehack.log 'checking alibi for collided body'
+    if typeof(collidedBody.gameObject.alibi) == 'undefined'
+      @roguehack.displayGameMessage(@phaserInstance, message)
+      return
+    message = collidedBody.gameObject.alibi.getMessage_Suspect()
+    @roguehack.displayGameMessage(@phaserInstance, message)
 
 module.exports = AlibiManager

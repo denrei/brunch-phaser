@@ -4,7 +4,11 @@ module.exports = class RogueHack
   CANVAS_HEIGHT_INITIAL: 600
   DEBUG: true
   PATH_DATA: './data/'
+  ID_NPC_DABYL: 'dabyl' # string must match string in tilemap json
+  ID_NPC_IVIKA: 'ivika'
+  ID_NPC_SIVAN: 'sivan'
   ID_NPC_TON: 'ton'
+  ID_NPC_VERA: 'vera'
 
   stickyText: null
 
@@ -34,6 +38,7 @@ module.exports = class RogueHack
   displayGameMessage: (phaserInstance, message) ->
     if @stickyText
       @stickyText.destroy()
+    @log message
     @stickyText = phaserInstance.add.text(16, 16, message,
       fontSize: '18px'
       padding:
