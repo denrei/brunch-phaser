@@ -1,13 +1,10 @@
-Function::property = (prop, desc) ->
-  Object.defineProperty @prototype, prop, desc
-
-
 module.exports = class RogueHack
 
   CANVAS_WIDTH_INITIAL: 800
   CANVAS_HEIGHT_INITIAL: 500
   DEBUG: true
   PATH_DATA: './data/'
+  ID_NPC_TON: 'ton'
 
   stickyText: null
 
@@ -34,10 +31,10 @@ module.exports = class RogueHack
     @log "zoom                   : #{ zoom }x"
     return zoom
 
-  displayGameMessage: (phaserReference, message) ->
+  displayGameMessage: (phaserInstance, message) ->
     if @stickyText
       @stickyText.destroy()
-    @stickyText = phaserReference.add.text(16, 16, message,
+    @stickyText = phaserInstance.add.text(16, 16, message,
       fontSize: '18px'
       padding:
         x: 10

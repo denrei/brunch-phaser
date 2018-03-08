@@ -38,4 +38,10 @@ class AlibiManager
 
     return @alibis
 
+
+  displayAlibiForBody: (collidedBody) ->
+    messageToDisplay = 'sup'
+    @roguehack.displayGameMessage(@phaserInstance, messageToDisplay)
+    console.log(messageToDisplay)
+
 module.exports = AlibiManager

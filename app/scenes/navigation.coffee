@@ -1,6 +1,9 @@
+AlibiManager = require('lib/alibimanager')
 RogueHack = require('lib/roguehack')
 roguehack = new RogueHack
+
 @navLocation = {} # Globalize @navLocation so that it can be refernced during Create() I'm sorryyyyy!
+
 module.exports =
 
   key: 'navigation'
@@ -14,7 +17,7 @@ module.exports =
     @load.image 'tile', 'street_X_YTiling.png'
     @load.spritesheet('playerAnim', 'character/jen-spritesheet.png', { frameWidth: 12, frameHeight: 25, endFrame: 18 });
 
-    @load.image 'ton', 'ton_placeholder.png'
+    @load.image roguehack.ID_NPC_TON, 'ton_placeholder.png'
     @load.image 'bg_clouds', 'bg_clouds.png'
     @load.image 'tilex', 'street_xTiling.png'
     @load.image 'tiley', 'street_yTiling.png'
@@ -32,11 +35,12 @@ module.exports =
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
 
     # Define NPC Objects
+    alibiManager = new AlibiManager(this, roguehack)
     ton = {}
     # Loop Through Tile Map Object Layer. If Object Name matches (NPC) Game Object,
     # Assign TileMap Coordinates to Game Object Position
     for e, i in map.objects[0].objects
-      if e.name == 'ton'
+      if e.name == roguehack.ID_NPC_TON
         ton.x = e.x
         ton.y = e.y
 
@@ -78,7 +82,7 @@ module.exports =
     @playerSprite.anims.play('idle_front');
 
     # Create NPCs
-    @tonSprite = @matter.add.image ton.x, ton.y, 'ton'
+    @tonSprite = @matter.add.image ton.x, ton.y, roguehack.ID_NPC_TON
     @tonSprite.body.isStatic = true
 
     # Create Top Level TileMap Layer (for objects that overlap NPCs)
@@ -126,10 +130,12 @@ module.exports =
             x: bodyB.gameObject.x
             y: bodyB.gameObject.y
         else
+          alibiManager.displayAlibiForBody(bodyA)
           bodyA.gameObject.anims.play("idle_front")
           @navLocation =
             x: bodyA.gameObject.x
-            y: bodyA.gameObject.y
+          y: bodyA.gameObject.y
+
     )
 
   update: (timestep, dt) ->
