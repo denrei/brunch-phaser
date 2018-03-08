@@ -14,6 +14,7 @@ module.exports =
   preload: ->
     @load.image 'tile', 'street_X_YTiling.png'
     @load.image 'girly', 'girly.gif'
+    @load.image 'bg_clouds', 'bg_clouds.png'
     @load.image 'tilex', 'street_xTiling.png'
     @load.image 'tiley', 'street_yTiling.png'
     @load.image 'wall1', 'exteriorWall_southFacing_fullCollision_variant01.png'
@@ -24,27 +25,27 @@ module.exports =
 
 
   create: ->
-
+    #first create background
+    bgClouds = @add.tileSprite 0, -20, 5000, 320, 'bg_clouds'
+    bgClouds.setScale 1.1
+    #second create tile map
     map = @make.tilemap(key: 'map')
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
-    # console.log(tileset)
-
-    layer = map.createStaticLayer(0, tileset, 0, 0); # Essential (apparently..)
-
-    # layer.setCollisionFromCollisionGroup(); # Set Collision From Tiled Collision Editor Data
+    #give it a layer w/ collision tiles
+    layer = map.createStaticLayer(0, tileset, 0, 32)
     layer.setCollisionByProperty({ collides: true });
 
     @matter.world.convertTilemapLayer(layer);
 
     @matter.world.setBounds map.widthInPixels, map.heightInPixels
 
-    @matter.world.createDebugGraphic()
-    @matter.world.drawDebug = true
+    # @matter.world.createDebugGraphic()
+    # @matter.world.drawDebug = true
 
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
 
-    @playerSprite = @matter.add.image 0, 0, 'girly'
+    @playerSprite = @matter.add.image 64, 196, 'girly'
     @playerSprite.setScale 0.1
 
     @keys = @input.keyboard.createCursorKeys()
