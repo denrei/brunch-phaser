@@ -57,7 +57,8 @@ module.exports =
 
     @playerSprite = @matter.add.sprite 256, 256, 'playerAnim'
 #    @playerSprite.play('idle-fwd');
-    #Set Initial Destination to Spawn Point
+    @playerSprite.setCircle()
+    # Set Initial Destination to Player Spawn Point
     @navLocation =
       x: @playerSprite.x
       y: @playerSprite.y
@@ -110,9 +111,14 @@ module.exports =
           @playerSprite.scaleX = 1
           @playerSprite.anims.play('walk_left')
 
-    # Idle Player and Stop Movement if Collision with Collision Tile
+    # Player Idle Animation and Stop Movement if Collision with Wall, etc.
     @matter.world.on('collisionstart', (event, bodyA, bodyB)->
-        #Detect if body has animations. Sometimes Player is bodyB.
+        console.log("Collide")
+        console.log("bodyA:")
+        console.log(bodyA.gameObject)
+        console.log("bodyB:")
+        console.log(bodyB.gameObject)
+        # Detect if body has animations. Sometimes Player is bodyB.
         # Other times player is Body A. (I dont't know why)
         if bodyB.gameObject.anims
           bodyB.gameObject.anims.play("idle_front")
@@ -124,17 +130,20 @@ module.exports =
           @navLocation =
             x: bodyA.gameObject.x
             y: bodyA.gameObject.y
-    );
+    )
 
   update: (timestep, dt) ->
-    # console.log(@playerSprite.body.friction)
     xDistance = (@navLocation.x - @playerSprite.x) * @MoveSpeed * dt
     yDistance = (@navLocation.y - @playerSprite.y) * @MoveSpeed * dt
     @playerSprite.x += xDistance
     @playerSprite.y += yDistance
 
+    # If Player Distance to Destination gets VERYYYY short...
     if Math.abs(xDistance.toFixed(2)) < 0.05 && Math.abs(yDistance.toFixed(2)) < 0.05
-      @playerSprite.anims.play("idle_front")
+      @playerSprite.anims.play("idle_front") # Play Idle Animation
+      @navLocation =
+        x: @playerSprite.x
+        y: @playerSprite.y
 
     cam = @cameras.main
     camScrollTarget =
