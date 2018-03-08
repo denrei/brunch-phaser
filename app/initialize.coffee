@@ -34,7 +34,7 @@ window.game = new Phaser.Game
   #   min: 10
   #   target: 60
   #   forceSetTimeout: off
-  # pixelArt: off
+  pixelArt: on
   # transparent: off
   # clearBeforeRender: on
   # backgroundColor: 0x000000
