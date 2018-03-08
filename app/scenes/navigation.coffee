@@ -64,6 +64,10 @@ module.exports =
     @tonSprite = @matter.add.image ton.x, ton.y, 'ton'
     @tonSprite.body.isStatic = true
 
+    layer3 = map.createStaticLayer(2, tileset, 0, 32)
+    layer3.setCollisionByProperty({ collides: true })
+    @matter.world.convertTilemapLayer(layer3)
+
     @keys = @input.keyboard.createCursorKeys()
 
     @input.on 'pointerdown', (pointer) =>
