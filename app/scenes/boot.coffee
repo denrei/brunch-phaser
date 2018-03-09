@@ -1,5 +1,4 @@
-RogueHack = require('lib/roguehack')
-roguehack = new RogueHack
+roguehack = new window.roguehack.RogueHack
 
 module.exports =
 

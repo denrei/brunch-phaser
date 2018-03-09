@@ -1,6 +1,4 @@
-AlibiManager = require('lib/alibimanager')
-RogueHack = require('lib/roguehack')
-roguehack = new RogueHack
+roguehack = new window.roguehack.RogueHack
 
 @navLocation = {} # Globalize @navLocation so that it can be refernced during Create() I'm sorryyyyy!
 
@@ -40,7 +38,7 @@ module.exports =
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
 
     # Define NPC Objects
-    alibiManager = new AlibiManager(this, roguehack)
+    alibiManager = new window.roguehack.AlibiManager(this, roguehack)
     npc_dabyl = {}
     npc_ivika = {}
     npc_sivan = {}

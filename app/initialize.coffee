@@ -1,5 +1,7 @@
-RogueHack = require('lib/roguehack')
-roguehack = new RogueHack
+require('lib/roguehack/import')
+console.log window.roguehack
+roguehack = new window.roguehack.RogueHack
+
 window.game = new Phaser.Game
   width: roguehack.CANVAS_WIDTH_INITIAL
   height: roguehack.CANVAS_HEIGHT_INITIAL

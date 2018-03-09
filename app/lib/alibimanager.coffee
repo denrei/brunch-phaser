@@ -1,4 +1,3 @@
-Alibi = require('lib/alibi')
 class AlibiManager
 
   COMMA_PLACEHOLDER: "|"
@@ -35,7 +34,7 @@ class AlibiManager
       id_witness1 = line[2]
       message_confirm_witness1 = line[3]
       message_unclear_witness1 = line[4]
-      alibi = new Alibi(id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
+      alibi = new window.roguehack.Alibi(id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
       @alibis.push(alibi)
 
   _getCapitalizedCharacterName: (name) ->
