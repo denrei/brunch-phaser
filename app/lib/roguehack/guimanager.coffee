@@ -41,7 +41,7 @@ class GUIManager
   displayClickableDialogOptions: (phaserInstance, options) ->
     if @clickableOptions
       for clickableOption in @clickableOptions
-        @clickableOptions.destroy()
+        clickableOption.destroy()
 
     @clickableOptions = []
 
@@ -66,7 +66,8 @@ class GUIManager
         backgroundColor: '#eee'
         fill: '#000'
       )
-      clickableOption.setOrigin(0).setScrollFactor(0)
+      clickableOption.setOrigin(0).setScrollFactor(0).setInteractive()
+      clickableOption.on('pointerdown', option.callback)
       @clickableOptions.push(clickableOption)
 
 
