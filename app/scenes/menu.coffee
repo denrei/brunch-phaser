@@ -12,7 +12,7 @@ module.exports =
 
     @add.text(offsetx, 10, 'ONE SHOT',
       fill: 'white'
-      fontFamily: roguehack.FONT
+      fontFamily: window.roguehack.Constant.FONT
       fontSize: 48)
       .setOrigin(0.0)
       .setShadow 0, 1, '#62F6FF', 10
@@ -20,7 +20,7 @@ module.exports =
     showSmallText = (message, x, y) =>
       @add.text(x, y, message,
         fill: '#FED141'
-        fontFamily: roguehack.FONT
+        fontFamily: window.roguehack.Constant.FONT
         fontSize: 18)
         .setOrigin(0)
         .setShadow 0, 1, 'black', 5

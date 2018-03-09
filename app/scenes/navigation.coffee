@@ -15,11 +15,11 @@ module.exports =
     @load.image 'tile', 'street_X_YTiling.png'
     @load.spritesheet('playerAnim', 'character/jen-spritesheet.png', { frameWidth: 12, frameHeight: 25, endFrame: 18 });
 
-    @load.image roguehack.ID_NPC_DABYL, 'character/Dabyl-placeholder.png'
-    @load.image roguehack.ID_NPC_IVIKA, 'character/Ivika-placeholder.png'
-    @load.image roguehack.ID_NPC_SIVAN, 'character/Sivan-placeholder.png'
-    @load.image roguehack.ID_NPC_TON, 'character/Ton-placeholder.png'
-    @load.image roguehack.ID_NPC_VERA, 'character/Vera-placeholder.png'
+    @load.image window.roguehack.Constant.ID_NPC_DABYL, 'character/Dabyl-placeholder.png'
+    @load.image window.roguehack.Constant.ID_NPC_IVIKA, 'character/Ivika-placeholder.png'
+    @load.image window.roguehack.Constant.ID_NPC_SIVAN, 'character/Sivan-placeholder.png'
+    @load.image window.roguehack.Constant.ID_NPC_TON, 'character/Ton-placeholder.png'
+    @load.image window.roguehack.Constant.ID_NPC_VERA, 'character/Vera-placeholder.png'
 
     @load.image 'bg_clouds', 'bg_clouds.png'
     @load.image 'tilex', 'street_xTiling.png'
@@ -48,19 +48,19 @@ module.exports =
     # Loop Through Tile Map Object Layer. If Object Name matches (NPC) Game Object,
     # Assign TileMap Coordinates to Game Object Position
     for e, i in map.objects[0].objects
-      if e.name == roguehack.ID_NPC_DABYL
+      if e.name == window.roguehack.Constant.ID_NPC_DABYL
         npc_dabyl.x = e.x
         npc_dabyl.y = e.y
-      else if e.name == roguehack.ID_NPC_IVIKA
+      else if e.name == window.roguehack.Constant.ID_NPC_IVIKA
         npc_ivika.x = e.x
         npc_ivika.y = e.y
-      else if e.name == roguehack.ID_NPC_SIVAN
+      else if e.name == window.roguehack.Constant.ID_NPC_SIVAN
         npc_sivan.x = e.x
         npc_sivan.y = e.y
-      else if e.name == roguehack.ID_NPC_TON
+      else if e.name == window.roguehack.Constant.ID_NPC_TON
         npc_ton.x = e.x
         npc_ton.y = e.y
-      else if e.name == roguehack.ID_NPC_VERA
+      else if e.name == window.roguehack.Constant.ID_NPC_VERA
         npc_vera.x = e.x
         npc_vera.y = e.y
 
@@ -106,11 +106,11 @@ module.exports =
       npcSprite.body.isStatic = true
       npcSprite.name = image_id
       npcSprite.alibi = alibiManager.assignAlibi()
-    createNpcSprite(roguehack.ID_NPC_DABYL, alibiManager, npc_dabyl.x, npc_dabyl.y)
-    createNpcSprite(roguehack.ID_NPC_IVIKA, alibiManager, npc_ivika.x, npc_ivika.y)
-    createNpcSprite(roguehack.ID_NPC_SIVAN, alibiManager, npc_sivan.x, npc_sivan.y)
-    createNpcSprite(roguehack.ID_NPC_TON, alibiManager, npc_ton.x, npc_ton.y)
-    createNpcSprite(roguehack.ID_NPC_VERA, alibiManager, npc_vera.x, npc_vera.y)
+    createNpcSprite(window.roguehack.Constant.ID_NPC_DABYL, alibiManager, npc_dabyl.x, npc_dabyl.y)
+    createNpcSprite(window.roguehack.Constant.ID_NPC_IVIKA, alibiManager, npc_ivika.x, npc_ivika.y)
+    createNpcSprite(window.roguehack.Constant.ID_NPC_SIVAN, alibiManager, npc_sivan.x, npc_sivan.y)
+    createNpcSprite(window.roguehack.Constant.ID_NPC_TON, alibiManager, npc_ton.x, npc_ton.y)
+    createNpcSprite(window.roguehack.Constant.ID_NPC_VERA, alibiManager, npc_vera.x, npc_vera.y)
 
     # Create Top Level TileMap Layer (for objects that overlap NPCs)
     layer3 = map.createStaticLayer(2, tileset, 0, 32)

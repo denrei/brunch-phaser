@@ -1,11 +1,10 @@
 require('lib/roguehack/import')
-console.log window.roguehack
-roguehack = new window.roguehack.GUIManager
+guiManager = new window.roguehack.GUIManager
 
 window.game = new Phaser.Game
-  width: roguehack.CANVAS_WIDTH_INITIAL
-  height: roguehack.CANVAS_HEIGHT_INITIAL
-  zoom: roguehack.getViewportZoom()
+  width: window.roguehack.Constant.CANVAS_WIDTH_INITIAL
+  height: window.roguehack.Constant.CANVAS_HEIGHT_INITIAL
+  zoom: guiManager.getViewportZoom()
   # resolution: 1
   # type: Phaser.AUTO
   # parent: null
