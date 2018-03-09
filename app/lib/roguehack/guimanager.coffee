@@ -4,7 +4,7 @@ class GUIManager
   MESSAGE_FONT_FAMILY: window.roguehack.Constant.FONT
 
   gameMessage: null
-  clickableOptions: null
+  clickableOptions: []
   messageOffsetX: 16
 
   log: (message) ->
@@ -38,13 +38,12 @@ class GUIManager
     @gameMessage.setOrigin(0.0)
     @gameMessage.setScrollFactor(0)
 
-  displayClickableDialogOptions: (phaserInstance, options) ->
-    if @clickableOptions
-      for clickableOption in @clickableOptions
-        clickableOption.destroy()
-
+  _destroyClickableOptions: ->
+    for clickableOption in @clickableOptions
+      clickableOption.destroy()
     @clickableOptions = []
 
+  displayClickableDialogOptions: (phaserInstance, options) ->
     i = 1
     options.reverse()
     for option in options
@@ -67,7 +66,11 @@ class GUIManager
         fill: '#000'
       )
       clickableOption.setOrigin(0).setScrollFactor(0).setInteractive()
-      clickableOption.on('pointerdown', option.callback)
+      callback = =>
+        @_destroyClickableOptions()
+        option.callback()
+
+      clickableOption.on('pointerdown', callback)
       @clickableOptions.push(clickableOption)
 
 

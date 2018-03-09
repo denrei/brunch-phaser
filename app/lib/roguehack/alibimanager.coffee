@@ -59,17 +59,20 @@ class AlibiManager
     message += collidedBody.gameObject.alibi.getMessage_Suspect()
     @guiManager.displayGameMessage(@phaserInstance, message)
 
-    dummyCallback = =>
-      console.log 'dummyCallback from dialog option'
+    dummyCallback1 = =>
+      console.log 'Player accused the suspect'
+
+    dummyCallback2 = =>
+      console.log 'Player left the conversation'
 
     options = []
     option1 = {
       message: '> Accuse suspect'
-      callback: dummyCallback
+      callback: dummyCallback1
     }
     option2 = {
       message: '> Cancel'
-      callback: dummyCallback
+      callback: dummyCallback2
     }
     options.push(option1)
     options.push(option2)
