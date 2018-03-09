@@ -5,9 +5,9 @@ class AlibiManager
   alibis: []
   count_assigned_abilis: 0
 
-  constructor: (phaserInstance, roguehack)->
+  constructor: (phaserInstance)->
     @phaserInstance = phaserInstance
-    @roguehack = roguehack
+    @guiManager = new window.roguehack.GUIManager()
     @_initializeAlibis()
 
   _getFileInputLines: () ->
@@ -50,13 +50,29 @@ class AlibiManager
 
   displayAlibiForBody: (collidedBody) ->
     message = 'ouch'
-    @roguehack.log 'checking alibi for collided body'
+    @guiManager.log 'checking alibi for collided body'
     if typeof(collidedBody.gameObject.alibi) == 'undefined'
-      @roguehack.displayGameMessage(@phaserInstance, message)
+      @guiManager.displayGameMessage(@phaserInstance, message)
       return
     message = ''
     message += @_getCapitalizedCharacterName(collidedBody.gameObject.name) + ":\n"
     message += collidedBody.gameObject.alibi.getMessage_Suspect()
-    @roguehack.displayGameMessage(@phaserInstance, message)
+    @guiManager.displayGameMessage(@phaserInstance, message)
+
+    dummyCallback = =>
+      console.log 'dummyCallback from dialog option'
+
+    options = []
+    option1 = {
+      message: '> Accuse suspect'
+      callback: dummyCallback
+    }
+    option2 = {
+      message: '> Cancel'
+      callback: dummyCallback
+    }
+    options.push(option1)
+    options.push(option2)
+    @guiManager.displayClickableDialogOptions(@phaserInstance, options)
 
 module.exports = AlibiManager

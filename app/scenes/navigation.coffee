@@ -1,5 +1,3 @@
-roguehack = new window.roguehack.GUIManager
-
 @navLocation = {} # Globalize @navLocation so that it can be refernced during Create() I'm sorryyyyy!
 
 module.exports =
@@ -8,7 +6,6 @@ module.exports =
 
   init: (data) ->
     console.log 'init', data, this
-
     @navLocation = new Phaser.Geom.Point()
 
   preload: ->
@@ -38,7 +35,7 @@ module.exports =
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
 
     # Define NPC Objects
-    alibiManager = new window.roguehack.AlibiManager(this, roguehack)
+    alibiManager = new window.roguehack.AlibiManager(this)
     npc_dabyl = {}
     npc_ivika = {}
     npc_sivan = {}
