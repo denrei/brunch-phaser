@@ -26,15 +26,10 @@ module.exports =
         .setOrigin(0)
         .setShadow 0, 1, 'black', 5
 
-    showSmallText('Tap to begin', offsetx, @sys.game.canvas.height  - 90)
-    showSmallText('A: Alibi simulator', offsetx, @sys.game.canvas.height - 70)
-    showSmallText('N: Player Navigation demo', offsetx, @sys.game.canvas.height - 50)
+    showSmallText('Tap to begin', offsetx, @sys.game.canvas.height  - 70)
 
     startScene = (sceneKey) =>
       @scene.start sceneKey, today: (new Date).toString(), this
-
-    @input.keyboard.once 'keydown_A', =>
-      startScene('alibisimulator')
 
     @input.keyboard.once 'keydown_N', =>
       startScene('navigation')
