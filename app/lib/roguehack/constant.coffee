@@ -1,9 +1,9 @@
 Constant =
 
-  CANVAS_WIDTH_INITIAL: 480
-  CANVAS_HEIGHT_INITIAL: 320
+  CANVAS_WIDTH_NATIVE: 500
+  CANVAS_HEIGHT_NATIVE: 300
   DEBUG: true
-  FONT: 'Futura,system-ui,sans-serif'
+  FONT: 'Courier, monospace'
   PATH_DATA: './data/'
   ID_NPC_DABYL: 'dabyl' # string must match string in tilemap json
   ID_NPC_IVIKA: 'ivika'
