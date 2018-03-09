@@ -1,4 +1,4 @@
-roguehack = new window.roguehack.RogueHack
+roguehack = new window.roguehack.GUIManager
 
 @navLocation = {} # Globalize @navLocation so that it can be refernced during Create() I'm sorryyyyy!
 

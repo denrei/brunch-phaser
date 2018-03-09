@@ -1,4 +1,4 @@
-module.exports = class RogueHack
+class GUIManager
 
   CANVAS_WIDTH_INITIAL: 480
   CANVAS_HEIGHT_INITIAL: 320
@@ -48,3 +48,5 @@ module.exports = class RogueHack
       backgroundColor: '#ffffff'
       fill: '#000000')
     @stickyText.setScrollFactor 0
+
+module.exports = GUIManager

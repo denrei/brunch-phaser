@@ -1,4 +1,4 @@
-roguehack = new window.roguehack.RogueHack
+roguehack = new window.roguehack.GUIManager
 
 module.exports =
 
