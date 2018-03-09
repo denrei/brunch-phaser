@@ -1,4 +1,5 @@
-FONT = 'Futura,system-ui,sans-serif'
+RogueHack = require('lib/roguehack')
+roguehack = new RogueHack
 
 module.exports =
 
@@ -8,11 +9,18 @@ module.exports =
     @highScore = data.score or 0
 
   create: ->
+
+    @sys.game.canvas.width
+
+
     sky = @add.image 400, 300, 'sky'
     sky.alpha = 0.25
-    @add.text(0, 0, 'ROGUEHACK/ONE SHOT',
+
+    offsetx = 10
+
+    @add.text(offsetx, 10, 'ONE SHOT',
       fill: 'white'
-      fontFamily: FONT
+      fontFamily: roguehack.FONT
       fontSize: 48)
       .setOrigin(0.0)
       .setShadow 0, 1, '#62F6FF', 10
@@ -20,14 +28,15 @@ module.exports =
     showSmallText = (message, x, y) =>
       @add.text(x, y, message,
         fill: '#FED141'
-        fontFamily: FONT
-        fontSize: 24)
+        fontFamily: roguehack.FONT
+        fontSize: 18)
         .setOrigin(0)
         .setShadow 0, 1, 'black', 5
 
-    showSmallText('A: Alibi simulator', 40, 390)
-    showSmallText('N: Player Navigation demo', 40, 420)
-    showSmallText('High Score: ' + @highScore, 40, 450)
+    showSmallText('Tap to begin', offsetx, @sys.game.canvas.height  - 90)
+    showSmallText('A: Alibi simulator', offsetx, @sys.game.canvas.height - 70)
+    showSmallText('N: Player Navigation demo', offsetx, @sys.game.canvas.height - 50)
+    showSmallText('High Score: ' + @highScore, offsetx, @sys.game.canvas.height - 30)
 
     startScene = (sceneKey) =>
       @scene.start sceneKey, today: (new Date).toString(), this
