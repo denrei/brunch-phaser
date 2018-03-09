@@ -5,14 +5,7 @@ module.exports =
 
   key: 'menu'
 
-  init: (data) ->
-    @highScore = data.score or 0
-
   create: ->
-
-    @sys.game.canvas.width
-
-
     sky = @add.image 400, 300, 'sky'
     sky.alpha = 0.25
 
@@ -36,7 +29,6 @@ module.exports =
     showSmallText('Tap to begin', offsetx, @sys.game.canvas.height  - 90)
     showSmallText('A: Alibi simulator', offsetx, @sys.game.canvas.height - 70)
     showSmallText('N: Player Navigation demo', offsetx, @sys.game.canvas.height - 50)
-    showSmallText('High Score: ' + @highScore, offsetx, @sys.game.canvas.height - 30)
 
     startScene = (sceneKey) =>
       @scene.start sceneKey, today: (new Date).toString(), this
@@ -49,19 +41,3 @@ module.exports =
 
     @input.on 'pointerdown', =>
       startScene('navigation')
-
-  extend:
-    highScore: 0
-
-
-
-
-
-
-
-
-
-
-
-
-
