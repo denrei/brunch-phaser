@@ -31,10 +31,10 @@ window.game = new Phaser.Game
       '#2c594f'
       '#002d40'
     ]
-  # fps:
-  #   min: 10
-  #   target: 60
-  #   forceSetTimeout: off
+   fps:
+     min: 0
+     target: 30
+     forceSetTimeout: off
   pixelArt: on
   # transparent: off
   # clearBeforeRender: on

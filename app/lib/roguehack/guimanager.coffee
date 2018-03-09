@@ -20,8 +20,6 @@ class GUIManager
     return zoom / 2
 
   displayGameMessage: (phaserInstance, message) ->
-    if @gameMessage
-      @gameMessage.destroy()
     @log message
     @gameMessage = phaserInstance.add.text(
       @messageOffsetX
@@ -38,7 +36,10 @@ class GUIManager
     @gameMessage.setOrigin(0.0)
     @gameMessage.setScrollFactor(0)
 
-  _destroyClickableOptions: ->
+  _destroyVisibleMessages: ->
+    if @gameMessage
+      @gameMessage.destroy()
+
     for clickableOption in @clickableOptions
       clickableOption.destroy()
     @clickableOptions = []
@@ -67,7 +68,7 @@ class GUIManager
       )
       clickableOption.setOrigin(0).setScrollFactor(0).setInteractive()
       callback = =>
-        @_destroyClickableOptions()
+        @_destroyVisibleMessages()
         option.callback()
 
       clickableOption.on('pointerdown', callback)
