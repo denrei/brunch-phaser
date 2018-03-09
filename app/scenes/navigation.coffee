@@ -168,8 +168,9 @@ module.exports =
     )
 
   update: (timestep, dt) ->
-    xDistance = (@navLocation.x - @playerSprite.x) * @MoveSpeed * dt
-    yDistance = (@navLocation.y - @playerSprite.y) * @MoveSpeed * dt
+    speed = 0.03
+    xDistance = Phaser.Math.Clamp((@navLocation.x - @playerSprite.x) * 99999, -speed, speed) * dt
+    yDistance = Phaser.Math.Clamp((@navLocation.y - @playerSprite.y) * 99999, -speed, speed) * dt
     @playerSprite.x += xDistance
     @playerSprite.y += yDistance
 
