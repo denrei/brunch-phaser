@@ -127,6 +127,8 @@ class AlibiManager
       message: '> ' + @MESSAGE_GOODBYE
       callback: => console.log('Player acknowledges ' + chief_nameToDisplay)
     })
-    @guiManager.displayClickableDialogOptions(@phaserInstance, 'Hi I\'m the ' + chief_nameToDisplay, options)
+    preamble = 'Hello. I am the ' + chief_nameToDisplay + '.' + 'Just got this report.  There was a murder last night.  Which also happened to be an attempted murder.  Gunther Carlson\'s clone was was shot dead last night at 11:10PM in Mr. Carlson\'s estate.  It\'s clear the real target was billionaire Carlson himself.  We have to find this killer quick.  Clones\' lives are expendable.  His is not.  We\'ve spoken with Carlson| who was doing a lot of finger pointing.  Of those he accused| here is who we\'ve narrowed it down to...'
+    preamble.replace("|", ",")
+    @guiManager.displayClickableDialogOptions(@phaserInstance, preamble, options)
 
 module.exports = AlibiManager

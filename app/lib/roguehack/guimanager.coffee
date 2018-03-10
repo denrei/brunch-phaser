@@ -50,6 +50,9 @@ class GUIManager
         y: 5
       backgroundColor: '#eee'
       fill: '#000'
+      wordWrap:
+        width: window.game.canvas.width - (2 * @messageOffsetX)
+        useAdvancedWrap: true
     )
     @gameMessage.setOrigin(0.0).setScrollFactor(0)
 
