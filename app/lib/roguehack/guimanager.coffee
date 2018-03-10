@@ -7,8 +7,6 @@ class GUIManager
   clickableOptions: []
   messageOffsetX: 16
 
-
-
   _hideGameMessage: ->
     @log 'destroy game message'
     if @gameMessage
@@ -59,6 +57,7 @@ class GUIManager
   displayClickableDialogOptions: (phaserInstance, preamble, options) ->
     @_hideClickableDialogOptions()
     @displayGameMessage(phaserInstance, preamble)
+    console.log
 
     i = 1
     options.reverse()
@@ -72,7 +71,7 @@ class GUIManager
       clickableOption = phaserInstance.add.text(
         offsetx
         offsety
-        message
+        '> ' + message
         fontFamily: @MESSAGE_FONT_FAMILY
         fontSize: @MESSAGE_FONT_SIZE + 'px'
         padding:
@@ -85,7 +84,10 @@ class GUIManager
       callback = =>
         @_hideGameMessage()
         @_hideClickableDialogOptions()
-        option.callback()
+        optionCallback = window.roguehack.Constant.NULL_CALLBACK
+        if option.callback
+          optionCallback = option.callback
+        optionCallback()
 
       clickableOption.on('pointerdown', callback)
       @clickableOptions.push(clickableOption)

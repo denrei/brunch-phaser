@@ -2,7 +2,7 @@ Constant =
 
   CANVAS_WIDTH_NATIVE: 500
   CANVAS_HEIGHT_NATIVE: 300
-  DEBUG: false
+  DEBUG: true
   FONT: 'Courier, monospace'
   PATH_DATA: './data/'
   ID_NPC_CHIEF: 'chief' # string must match string in tilemap json
@@ -12,5 +12,6 @@ Constant =
   ID_NPC_SIVAN: 'sivan'
   ID_NPC_TON: 'ton'
   ID_NPC_VERA: 'vera'
+  NULL_CALLBACK: -> return
 
 module.exports = Constant

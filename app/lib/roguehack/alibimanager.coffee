@@ -81,6 +81,7 @@ class AlibiManager
 
     @NULL_ALIBI_CHIEF = new window.roguehack.Alibi('', window.roguehack.Constant.ID_NPC_CHIEF, '', '', '', '')
     @MESSAGE_GOODBYE = "Goodbye"
+    @MESSAGE_CONTINUE = "Next"
     @MESSAGE_SCENARIO_DESCRIPTION = "Just got this report.  There was a murder last night.  Which also happened to be an attempted murder.  Gunther Carlson's clone was was shot dead last night at 11:10PM in Mr. Carlson's estate.  It's clear the real target was billionaire Carlson himself.  We have to find this killer quick.  Clones' lives are expendable.  His is not.  We've spoken with Carlson, who was doing a lot of finger pointing.  Of those he accused, here is who we've narrowed it down to..."
     @alibis = []
     @count_abilis_assigned = 0
@@ -113,23 +114,49 @@ class AlibiManager
 
     options = []
     options.push({
-      message: '> Accuse suspect'
-      callback: => console.log('Player accuses suspect')
+      message: 'Accuse suspect'
     })
     options.push({
-      message: '> ' + @MESSAGE_GOODBYE
-      callback: => console.log('Player leaves conversation')
+      message: @MESSAGE_GOODBYE
     })
     @guiManager.displayClickableDialogOptions(@phaserInstance, preamble, options)
 
   handleDialogWithChief: ->
-    chief_nameToDisplay = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase()
-    options = []
-    options.push({
-      message: '> ' + @MESSAGE_GOODBYE
-      callback: => console.log('Player acknowledges ' + chief_nameToDisplay)
+
+    callback_depth_1 = =>
+      options_depth_1 = []
+      options_depth_1.push({
+        message: @MESSAGE_GOODBYE
+      })
+
+      constant = window.roguehack.Constant
+      preamble_depth_1 = ''
+      preamble_depth_1 += constant.ID_NPC_DABYL.toUpperCase() + ':\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += constant.ID_NPC_IVIKA.toUpperCase() + ':\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += constant.ID_NPC_SIVAN.toUpperCase() + ':\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += constant.ID_NPC_TON.toUpperCase() + ':\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += '\n'
+      preamble_depth_1 += constant.ID_NPC_VERA.toUpperCase() + ':\n'
+      @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_1, options_depth_1)
+
+    options_depth_0 = []
+    options_depth_0.push({
+      message: @MESSAGE_CONTINUE
+      callback: callback_depth_1
     })
-    preamble = 'Hello. I am the ' + chief_nameToDisplay + '.\n' + @MESSAGE_SCENARIO_DESCRIPTION
-    @guiManager.displayClickableDialogOptions(@phaserInstance, preamble, options)
+
+    preamble_depth_0 = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ':\n' + @MESSAGE_SCENARIO_DESCRIPTION
+    @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_0, options_depth_0)
 
 module.exports = AlibiManager
