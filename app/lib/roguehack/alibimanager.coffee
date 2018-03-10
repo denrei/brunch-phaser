@@ -27,7 +27,6 @@ class AlibiManager
     return isAlibiTruthful
 
   _shuffleArray: (inputArray) ->
-
     arrayToReturn = []
     picked = 0
     N = inputArray.length
@@ -68,6 +67,11 @@ class AlibiManager
     alibis_unshuffled[subscript_falseAlibi].setIsAlibiTruthful(false)
     @alibis = @_shuffleArray(alibis_unshuffled)
 
+  _accuseSuspect: (alibi) ->
+    if alibi.getIsAlibiTruthful()
+      @guiManager.displayGameMessage(@phaserInstance, 'You lose! You wrongfully accused ' + alibi.getId_Suspect().toUpperCase() + ".")
+      return
+    @guiManager.displayGameMessage(@phaserInstance, 'You found a hole in ' + alibi.getId_Suspect().toUpperCase() + "'s alibi. Congratulations!")
   # --------------------------------------------------------------------------------------------------------------------
 
   constructor: (phaserInstance, numberOfSuspects)->
@@ -102,20 +106,14 @@ class AlibiManager
     preamble += collidedBody.gameObject.name.toUpperCase() + ":\n"
     preamble += alibi.getMessage_Suspect()
 
-    dummyCallback1 = =>
-      console.log 'Player accused the suspect'
-
-    dummyCallback2 = =>
-      console.log 'Player left the conversation'
-
     options = []
     option1 = {
       message: '> Accuse suspect'
-      callback: dummyCallback1
+      callback: => console.log('Player accuses suspect')
     }
     option2 = {
       message: '> Cancel'
-      callback: dummyCallback2
+      callback: => console.log('Player leaves conversation')
     }
     options.push(option1)
     options.push(option2)
