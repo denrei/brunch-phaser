@@ -7,6 +7,22 @@ class GUIManager
   clickableOptions: []
   messageOffsetX: 16
 
+
+
+  _hideGameMessage: ->
+    @log 'destroy game message'
+    if @gameMessage
+      @gameMessage.destroy()
+      @gameMessage = null
+
+  _hideClickableDialogOptions: ->
+    @log 'destroy clickable dialog option'
+    for clickableOption in @clickableOptions
+      clickableOption.destroy()
+    @clickableOptions = []
+
+  # --------------------------------------------------------------------------------------------------------------------
+
   log: (message) ->
     if window.roguehack.Constant.DEBUG
       console.log message
@@ -20,6 +36,8 @@ class GUIManager
     return zoom / 2
 
   displayGameMessage: (phaserInstance, message) ->
+    @_hideGameMessage()
+
     @log message
     @gameMessage = phaserInstance.add.text(
       @messageOffsetX
@@ -33,18 +51,12 @@ class GUIManager
       backgroundColor: '#eee'
       fill: '#000'
     )
-    @gameMessage.setOrigin(0.0)
-    @gameMessage.setScrollFactor(0)
+    @gameMessage.setOrigin(0.0).setScrollFactor(0)
 
-  _destroyVisibleMessages: ->
-    if @gameMessage
-      @gameMessage.destroy()
+  displayClickableDialogOptions: (phaserInstance, preamble, options) ->
+    @_hideClickableDialogOptions()
+    @displayGameMessage(phaserInstance, preamble)
 
-    for clickableOption in @clickableOptions
-      clickableOption.destroy()
-    @clickableOptions = []
-
-  displayClickableDialogOptions: (phaserInstance, options) ->
     i = 1
     options.reverse()
     for option in options
@@ -68,7 +80,8 @@ class GUIManager
       )
       clickableOption.setOrigin(0).setScrollFactor(0).setInteractive()
       callback = =>
-        @_destroyVisibleMessages()
+        @_hideGameMessage()
+        @_hideClickableDialogOptions()
         option.callback()
 
       clickableOption.on('pointerdown', callback)

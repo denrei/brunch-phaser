@@ -36,7 +36,6 @@ module.exports =
 
     # Define NPC Objects
     alibiManager = new window.roguehack.AlibiManager(this, 5)
-    console.log alibiManager.getAlibis()
     npc_dabyl = {}
     npc_ivika = {}
     npc_sivan = {}

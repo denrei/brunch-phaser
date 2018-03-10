@@ -98,10 +98,9 @@ class AlibiManager
       @guiManager.displayGameMessage(@phaserInstance, message)
       return
 
-    message = ''
-    message += collidedBody.gameObject.name.toUpperCase() + ":\n"
-    message += alibi.getMessage_Suspect()
-    @guiManager.displayGameMessage(@phaserInstance, message)
+    preamble = ''
+    preamble += collidedBody.gameObject.name.toUpperCase() + ":\n"
+    preamble += alibi.getMessage_Suspect()
 
     dummyCallback1 = =>
       console.log 'Player accused the suspect'
@@ -120,6 +119,6 @@ class AlibiManager
     }
     options.push(option1)
     options.push(option2)
-    @guiManager.displayClickableDialogOptions(@phaserInstance, options)
+    @guiManager.displayClickableDialogOptions(@phaserInstance, preamble, options)
 
 module.exports = AlibiManager
