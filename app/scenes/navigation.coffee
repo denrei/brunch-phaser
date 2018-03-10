@@ -36,6 +36,7 @@ module.exports =
 
     # Define NPC Objects
     alibiManager = new window.roguehack.AlibiManager(this, 5)
+    console.log alibiManager.getAlibis()
     npc_dabyl = {}
     npc_ivika = {}
     npc_sivan = {}
@@ -102,8 +103,7 @@ module.exports =
       npcSprite = @matter.add.image x, y, image_id
       npcSprite.body.isStatic = true
       npcSprite.name = image_id
-      npcSprite.alibi = alibiManager.assignAlibi()
-      console.log npcSprite.alibi
+      alibiManager.assignAlibi(npcSprite.name)
     createNpcSprite(window.roguehack.Constant.ID_NPC_DABYL, alibiManager, npc_dabyl.x, npc_dabyl.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_IVIKA, alibiManager, npc_ivika.x, npc_ivika.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_SIVAN, alibiManager, npc_sivan.x, npc_sivan.y)

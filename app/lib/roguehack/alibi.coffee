@@ -1,15 +1,13 @@
 class Alibi
 
-  constructor: (isAlibiTruthful, id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)->
-    @isAlibiTruthful = isAlibiTruthful
+  constructor: (id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)->
+    @isAlibiTruthful = true
+    @id_suspect = 'nobody'
     @id = id
     @message_suspect = message_suspect
     @id_witness1 = id_witness1
     @message_confirm_witness1 = message_confirm_witness1
     @message_unclear_witness1 = message_unclear_witness1
-
-  getIsAlibiTruthful: ->
-    return @isAlibiTruthful
 
   getId: ->
     return @id
@@ -25,5 +23,18 @@ class Alibi
 
   getMessageUnclear_Witness1: ->
     return @message_unclear_witness1
+
+  getIsAlibiTruthful: ->
+    return @isAlibiTruthful
+
+  setIsAlibiTruthful: (isAlibiTruthful) ->
+    @isAlibiTruthful = isAlibiTruthful
+
+  getId_Suspect: ->
+    return @id_suspect
+
+  setId_Suspect: (id_suspect) ->
+    @id_suspect = id_suspect
+
 
 module.exports = Alibi

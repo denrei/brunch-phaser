@@ -1,17 +1,5 @@
 class AlibiManager
 
-  COMMA_PLACEHOLDER: "|"
-  NEWLINE: "\r\n" # thanks Google Drive
-  alibis: []
-  count_abilis_assigned: 0
-  count_abilis_false: 0
-
-  constructor: (phaserInstance, numberOfSuspects)->
-    @phaserInstance = phaserInstance
-    @numberOfSuspects = numberOfSuspects
-    @guiManager = new window.roguehack.GUIManager()
-    @_initializeAlibis()
-
   _getFileInputLines: () ->
     @data_alibi_original = @phaserInstance.cache.text.get('file-alibi')
     lines_original = @data_alibi_original.split(@NEWLINE)
@@ -38,9 +26,32 @@ class AlibiManager
       @count_abilis_false += 1
     return isAlibiTruthful
 
+  _shuffleArray: (inputArray) ->
+
+    arrayToReturn = []
+    picked = 0
+    N = inputArray.length
+    isAvailable = {}
+    for i in [0..(N-1)]
+      isAvailable[i] = true
+    while picked < N
+      subscript = parseInt(Math.random() * 5)
+      if isAvailable[subscript]
+        isAvailable[subscript] = false
+        arrayToReturn.push(inputArray[subscript])
+        picked += 1
+    return arrayToReturn
+
+  _getAlibiForSuspect: (id_suspect) ->
+    for alibi in @alibis
+      if id_suspect == alibi.getId_Suspect()
+        return alibi
+    return null
+
   _initializeAlibis: () ->
     isHeaderLine = true
     i = 0
+    alibis_unshuffled = []
     for line in @_getFileInputLines()
       if isHeaderLine
         isHeaderLine = false
@@ -50,17 +61,34 @@ class AlibiManager
       id_witness1 = line[2]
       message_confirm_witness1 = line[3]
       message_unclear_witness1 = line[4]
-      alibi = new window.roguehack.Alibi(@_generateTruthinessForAlibi(i), id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
-      @alibis.push(alibi)
+      alibi = new window.roguehack.Alibi(id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
+      alibis_unshuffled.push(alibi)
       i += 1
+    subscript_falseAlibi = parseInt(Math.random() * 5)
+    alibis_unshuffled[subscript_falseAlibi].setIsAlibiTruthful(false)
+    @alibis = @_shuffleArray(alibis_unshuffled)
+
+  # --------------------------------------------------------------------------------------------------------------------
+
+  constructor: (phaserInstance, numberOfSuspects)->
+    @COMMA_PLACEHOLDER = "|"
+    @NEWLINE = "\r\n" # thanks Google Drive
+    @alibis = []
+    @count_abilis_assigned = 0
+    @count_abilis_false = 0
+
+    @phaserInstance = phaserInstance
+    @numberOfSuspects = numberOfSuspects
+    @guiManager = new window.roguehack.GUIManager()
+
+    @_initializeAlibis()
 
   getAlibis: () ->
     return @alibis
 
-  assignAlibi: ->
-    alibiToReturn = @alibis[@count_abilis_assigned]
+  assignAlibi: (id_suspect) ->
+    @alibis[@count_abilis_assigned].setId_Suspect(id_suspect)
     @count_abilis_assigned += 1
-    return alibiToReturn
 
   displayAlibiForBody: (collidedBody) ->
     message = 'ouch'
@@ -71,7 +99,7 @@ class AlibiManager
 
     message = ''
     message += collidedBody.gameObject.name.toUpperCase() + ":\n"
-    message += collidedBody.gameObject.alibi.getMessage_Suspect()
+    message += @_getAlibiForSuspect(collidedBody.gameObject.name).getMessage_Suspect()
     @guiManager.displayGameMessage(@phaserInstance, message)
 
     dummyCallback1 = =>
