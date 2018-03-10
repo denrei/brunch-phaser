@@ -3,10 +3,12 @@ class AlibiManager
   COMMA_PLACEHOLDER: "|"
   NEWLINE: "\r\n" # thanks Google Drive
   alibis: []
-  count_assigned_abilis: 0
+  count_abilis_assigned: 0
+  count_abilis_false: 0
 
-  constructor: (phaserInstance)->
+  constructor: (phaserInstance, numberOfSuspects)->
     @phaserInstance = phaserInstance
+    @numberOfSuspects = numberOfSuspects
     @guiManager = new window.roguehack.GUIManager()
     @_initializeAlibis()
 
@@ -23,8 +25,22 @@ class AlibiManager
       lines_toReturn.push(line_toReturn)
     return lines_toReturn
 
+  _generateTruthinessForAlibi: (i) ->
+    if @count_abilis_false > 0
+      return true
+
+    if i == (@numberOfSuspects - 1)
+      @count_abilis_false += 1
+      return false
+
+    isAlibiTruthful = Math.random() > 0.5
+    if !isAlibiTruthful
+      @count_abilis_false += 1
+    return isAlibiTruthful
+
   _initializeAlibis: () ->
     isHeaderLine = true
+    i = 0
     for line in @_getFileInputLines()
       if isHeaderLine
         isHeaderLine = false
@@ -34,18 +50,16 @@ class AlibiManager
       id_witness1 = line[2]
       message_confirm_witness1 = line[3]
       message_unclear_witness1 = line[4]
-      alibi = new window.roguehack.Alibi(id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
+      alibi = new window.roguehack.Alibi(@_generateTruthinessForAlibi(i), id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
       @alibis.push(alibi)
-
-  _getCapitalizedCharacterName: (name) ->
-    return name.toUpperCase()
+      i += 1
 
   getAlibis: () ->
     return @alibis
 
   assignAlibi: ->
-    alibiToReturn = @alibis[@count_assigned_abilis]
-    @count_assigned_abilis += 1
+    alibiToReturn = @alibis[@count_abilis_assigned]
+    @count_abilis_assigned += 1
     return alibiToReturn
 
   displayAlibiForBody: (collidedBody) ->
@@ -54,8 +68,9 @@ class AlibiManager
     if typeof(collidedBody.gameObject.alibi) == 'undefined'
       @guiManager.displayGameMessage(@phaserInstance, message)
       return
+
     message = ''
-    message += @_getCapitalizedCharacterName(collidedBody.gameObject.name) + ":\n"
+    message += collidedBody.gameObject.name.toUpperCase() + ":\n"
     message += collidedBody.gameObject.alibi.getMessage_Suspect()
     @guiManager.displayGameMessage(@phaserInstance, message)
 

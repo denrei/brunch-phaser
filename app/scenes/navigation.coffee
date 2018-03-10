@@ -35,7 +35,7 @@ module.exports =
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
 
     # Define NPC Objects
-    alibiManager = new window.roguehack.AlibiManager(this)
+    alibiManager = new window.roguehack.AlibiManager(this, 5)
     npc_dabyl = {}
     npc_ivika = {}
     npc_sivan = {}
@@ -103,6 +103,7 @@ module.exports =
       npcSprite.body.isStatic = true
       npcSprite.name = image_id
       npcSprite.alibi = alibiManager.assignAlibi()
+      console.log npcSprite.alibi
     createNpcSprite(window.roguehack.Constant.ID_NPC_DABYL, alibiManager, npc_dabyl.x, npc_dabyl.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_IVIKA, alibiManager, npc_ivika.x, npc_ivika.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_SIVAN, alibiManager, npc_sivan.x, npc_sivan.y)
