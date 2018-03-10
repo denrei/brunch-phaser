@@ -76,10 +76,12 @@ class AlibiManager
   # --------------------------------------------------------------------------------------------------------------------
 
   constructor: (phaserInstance, numberOfSuspects)->
-    @NULL_ALIBI_CHIEF = new window.roguehack.Alibi('', window.roguehack.Constant.ID_NPC_CHIEF, '', '', '', '')
-    @MESSAGE_GOODBYE = "Goodbye"
     @COMMA_PLACEHOLDER = "|"
     @NEWLINE = "\r\n" # thanks Google Drive
+
+    @NULL_ALIBI_CHIEF = new window.roguehack.Alibi('', window.roguehack.Constant.ID_NPC_CHIEF, '', '', '', '')
+    @MESSAGE_GOODBYE = "Goodbye"
+    @MESSAGE_SCENARIO_DESCRIPTION = "Just got this report.  There was a murder last night.  Which also happened to be an attempted murder.  Gunther Carlson's clone was was shot dead last night at 11:10PM in Mr. Carlson's estate.  It's clear the real target was billionaire Carlson himself.  We have to find this killer quick.  Clones' lives are expendable.  His is not.  We've spoken with Carlson, who was doing a lot of finger pointing.  Of those he accused, here is who we've narrowed it down to..."
     @alibis = []
     @count_abilis_assigned = 0
     @count_abilis_false = 0
@@ -127,8 +129,7 @@ class AlibiManager
       message: '> ' + @MESSAGE_GOODBYE
       callback: => console.log('Player acknowledges ' + chief_nameToDisplay)
     })
-    preamble = 'Hello. I am the ' + chief_nameToDisplay + '.' + 'Just got this report.  There was a murder last night.  Which also happened to be an attempted murder.  Gunther Carlson\'s clone was was shot dead last night at 11:10PM in Mr. Carlson\'s estate.  It\'s clear the real target was billionaire Carlson himself.  We have to find this killer quick.  Clones\' lives are expendable.  His is not.  We\'ve spoken with Carlson| who was doing a lot of finger pointing.  Of those he accused| here is who we\'ve narrowed it down to...'
-    preamble.replace("|", ",")
+    preamble = 'Hello. I am the ' + chief_nameToDisplay + '.\n' + @MESSAGE_SCENARIO_DESCRIPTION
     @guiManager.displayClickableDialogOptions(@phaserInstance, preamble, options)
 
 module.exports = AlibiManager
