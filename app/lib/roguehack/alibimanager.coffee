@@ -124,30 +124,26 @@ class AlibiManager
   handleDialogWithChief: ->
 
     callback_depth_1 = =>
+      characterIds = [
+        window.roguehack.Constant.ID_NPC_DABYL,
+        window.roguehack.Constant.ID_NPC_IVIKA,
+        window.roguehack.Constant.ID_NPC_SIVAN,
+        window.roguehack.Constant.ID_NPC_TON,
+        window.roguehack.Constant.ID_NPC_VERA,
+      ]
       options_depth_1 = []
+      for characterId in characterIds
+        options_depth_1.push({
+          thumbnail: characterId
+          message: characterId.toUpperCase()
+        })
       options_depth_1.push({
         message: @MESSAGE_GOODBYE
       })
 
-      constant = window.roguehack.Constant
       preamble_depth_1 = ''
-      preamble_depth_1 += constant.ID_NPC_DABYL.toUpperCase() + ':\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += constant.ID_NPC_IVIKA.toUpperCase() + ':\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += constant.ID_NPC_SIVAN.toUpperCase() + ':\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += constant.ID_NPC_TON.toUpperCase() + ':\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += '\n'
-      preamble_depth_1 += constant.ID_NPC_VERA.toUpperCase() + ':\n'
+      preamble_depth_1 = window.roguehack.Constant.ID_NPC_CHIEF + ":\n"
+      preamble_depth_1 = 'Here are the suspects.'
       @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_1, options_depth_1)
 
     options_depth_0 = []
