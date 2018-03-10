@@ -5,7 +5,8 @@ Constant =
   DEBUG: false
   FONT: 'Courier, monospace'
   PATH_DATA: './data/'
-  ID_NPC_DABYL: 'dabyl' # string must match string in tilemap json
+  ID_NPC_CHIEF: 'chief' # string must match string in tilemap json
+  ID_NPC_DABYL: 'dabyl'
   ID_NPC_IVIKA: 'ivika'
   ID_NPC_SIVAN: 'sivan'
   ID_NPC_TON: 'ton'

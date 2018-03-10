@@ -12,6 +12,7 @@ module.exports =
     @load.image 'tile', 'street_X_YTiling.png'
     @load.spritesheet('playerAnim', 'character/jen-spritesheet.png', { frameWidth: 12, frameHeight: 25, endFrame: 18 });
 
+    @load.image window.roguehack.Constant.ID_NPC_CHIEF, 'character/megaman.png'
     @load.image window.roguehack.Constant.ID_NPC_DABYL, 'character/Dabyl-placeholder.png'
     @load.image window.roguehack.Constant.ID_NPC_IVIKA, 'character/Ivika-placeholder.png'
     @load.image window.roguehack.Constant.ID_NPC_SIVAN, 'character/Sivan-placeholder.png'
@@ -36,6 +37,7 @@ module.exports =
 
     # Define NPC Objects
     alibiManager = new window.roguehack.AlibiManager(this, 5)
+    npc_chief = {}
     npc_dabyl = {}
     npc_ivika = {}
     npc_sivan = {}
@@ -45,7 +47,10 @@ module.exports =
     # Loop Through Tile Map Object Layer. If Object Name matches (NPC) Game Object,
     # Assign TileMap Coordinates to Game Object Position
     for e, i in map.objects[0].objects
-      if e.name == window.roguehack.Constant.ID_NPC_DABYL
+      if e.name == window.roguehack.Constant.ID_NPC_CHIEF
+        npc_chief.x = e.x
+        npc_chief.y = e.y
+      else if e.name == window.roguehack.Constant.ID_NPC_DABYL
         npc_dabyl.x = e.x
         npc_dabyl.y = e.y
       else if e.name == window.roguehack.Constant.ID_NPC_IVIKA
@@ -102,12 +107,15 @@ module.exports =
       npcSprite = @matter.add.image x, y, image_id
       npcSprite.body.isStatic = true
       npcSprite.name = image_id
-      alibiManager.assignAlibi(npcSprite.name)
+      if alibiManager
+        alibiManager.assignAlibi(npcSprite.name)
+    createNpcSprite(window.roguehack.Constant.ID_NPC_CHIEF, null, npc_chief.x, npc_chief.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_DABYL, alibiManager, npc_dabyl.x, npc_dabyl.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_IVIKA, alibiManager, npc_ivika.x, npc_ivika.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_SIVAN, alibiManager, npc_sivan.x, npc_sivan.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_TON, alibiManager, npc_ton.x, npc_ton.y)
     createNpcSprite(window.roguehack.Constant.ID_NPC_VERA, alibiManager, npc_vera.x, npc_vera.y)
+
 
     # Create Top Level TileMap Layer (for objects that overlap NPCs)
     layer3 = map.createStaticLayer(2, tileset, 0, 32)

@@ -27,7 +27,18 @@
          "draworder":"topdown",
          "name":"Object Layer 1",
          "objects":[
-                {
+           {
+             "height":12,
+             "id":1,
+             "name":"chief",
+             "rotation":0,
+             "type":"",
+             "visible":true,
+             "width":12,
+             "x":200,
+             "y":300
+           },
+           {
                  "height":12,
                  "id":1,
                  "name":"dabyl",
