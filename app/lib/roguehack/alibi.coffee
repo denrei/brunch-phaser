@@ -1,9 +1,9 @@
 class Alibi
 
-  constructor: (id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)->
+  constructor: (id, id_suspect, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)->
     @isAlibiTruthful = true
-    @id_suspect = 'nobody'
     @id = id
+    @id_suspect = id_suspect
     @message_suspect = message_suspect
     @id_witness1 = id_witness1
     @message_confirm_witness1 = message_confirm_witness1

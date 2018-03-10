@@ -148,27 +148,30 @@ module.exports =
           @playerSprite.anims.play('walk_left')
 
     # Player Idle Animation and Stop Movement if Collision with Wall, etc.
-    @matter.world.on('collisionstart', (event, bodyA, bodyB)->
-        console.log("Collide")
-        console.log("bodyA:")
-        console.log(bodyA.gameObject)
-        console.log("bodyB:")
-        console.log(bodyB.gameObject)
-        # Detect if body has animations. Sometimes Player is bodyB.
-        # Other times player is Body A. (I dont't know why)
-        if bodyB.gameObject.anims
-          bodyB.gameObject.anims.play("idle_front")
-          @navLocation =
-            x: bodyB.gameObject.x
-            y: bodyB.gameObject.y
-        else
-          alibiManager.displayAlibiForBody(bodyB)
-          bodyA.gameObject.anims.play("idle_front")
-          @navLocation =
-            x: bodyA.gameObject.x
-            y: bodyA.gameObject.y
+    @matter.world.on 'collisionstart', (event, bodyA, bodyB) ->
+      console.log("Collide")
+      # console.log("bodyA:")
+      # console.log(bodyA.gameObject)
+      # console.log("bodyB:")
+      # console.log(bodyB.gameObject)
 
-    )
+      # Detect if body has animations. Sometimes Player is bodyB.
+      # Other times player is Body A. (I dont't know why)
+      if bodyB.gameObject.anims
+        bodyB.gameObject.anims.play("idle_front")
+        @navLocation =
+          x: bodyB.gameObject.x
+          y: bodyB.gameObject.y
+        return
+      bodyA.gameObject.anims.play("idle_front")
+      @navLocation =
+        x: bodyA.gameObject.x
+        y: bodyA.gameObject.y
+      if bodyB.gameObject.name == window.roguehack.Constant.ID_NPC_CHIEF
+        alibiManager.handleDialogWithChief(bodyB)
+        return
+      alibiManager.displayAlibiForBody(bodyB)
+
 
   update: (timestep, dt) ->
     speed = 0.03

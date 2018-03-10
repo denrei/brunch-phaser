@@ -60,7 +60,7 @@ class AlibiManager
       id_witness1 = line[2]
       message_confirm_witness1 = line[3]
       message_unclear_witness1 = line[4]
-      alibi = new window.roguehack.Alibi(id, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
+      alibi = new window.roguehack.Alibi(id, window.roguehack.Constant.ID_NPC_NOBODY, message_suspect, id_witness1, message_confirm_witness1, message_unclear_witness1)
       alibis_unshuffled.push(alibi)
       i += 1
     subscript_falseAlibi = parseInt(Math.random() * 5)
@@ -72,9 +72,12 @@ class AlibiManager
       @guiManager.displayGameMessage(@phaserInstance, 'You lose! You wrongfully accused ' + alibi.getId_Suspect().toUpperCase() + ".")
       return
     @guiManager.displayGameMessage(@phaserInstance, 'You found a hole in ' + alibi.getId_Suspect().toUpperCase() + "'s alibi. Congratulations!")
+
   # --------------------------------------------------------------------------------------------------------------------
 
   constructor: (phaserInstance, numberOfSuspects)->
+    @NULL_ALIBI_CHIEF = new window.roguehack.Alibi('', window.roguehack.Constant.ID_NPC_CHIEF, '', '', '', '')
+    @MESSAGE_GOODBYE = "Goodbye"
     @COMMA_PLACEHOLDER = "|"
     @NEWLINE = "\r\n" # thanks Google Drive
     @alibis = []
@@ -103,20 +106,27 @@ class AlibiManager
       return
 
     preamble = ''
-    preamble += collidedBody.gameObject.name.toUpperCase() + ":\n"
+    preamble += alibi.getId_Suspect().toUpperCase() + ":\n"
     preamble += alibi.getMessage_Suspect()
 
     options = []
-    option1 = {
+    options.push({
       message: '> Accuse suspect'
       callback: => console.log('Player accuses suspect')
-    }
-    option2 = {
-      message: '> Cancel'
+    })
+    options.push({
+      message: '> ' + @MESSAGE_GOODBYE
       callback: => console.log('Player leaves conversation')
-    }
-    options.push(option1)
-    options.push(option2)
+    })
     @guiManager.displayClickableDialogOptions(@phaserInstance, preamble, options)
+
+  handleDialogWithChief: ->
+    chief_nameToDisplay = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase()
+    options = []
+    options.push({
+      message: '> ' + @MESSAGE_GOODBYE
+      callback: => console.log('Player acknowledges ' + chief_nameToDisplay)
+    })
+    @guiManager.displayClickableDialogOptions(@phaserInstance, 'Hi I\'m the ' + chief_nameToDisplay, options)
 
 module.exports = AlibiManager
