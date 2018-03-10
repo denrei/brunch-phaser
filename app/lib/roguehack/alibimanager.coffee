@@ -93,13 +93,14 @@ class AlibiManager
   displayAlibiForBody: (collidedBody) ->
     message = 'ouch'
     @guiManager.log 'checking alibi for collided body'
-    if typeof(collidedBody.gameObject.alibi) == 'undefined'
+    alibi = @_getAlibiForSuspect(collidedBody.gameObject.name)
+    if !alibi
       @guiManager.displayGameMessage(@phaserInstance, message)
       return
 
     message = ''
     message += collidedBody.gameObject.name.toUpperCase() + ":\n"
-    message += @_getAlibiForSuspect(collidedBody.gameObject.name).getMessage_Suspect()
+    message += alibi.getMessage_Suspect()
     @guiManager.displayGameMessage(@phaserInstance, message)
 
     dummyCallback1 = =>
