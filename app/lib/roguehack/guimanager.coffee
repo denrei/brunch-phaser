@@ -5,19 +5,23 @@ class GUIManager
 
   gameMessage: null
   clickableOptions: []
+  clickableOptionThumbnails: []
   messageOffsetX: 16
 
-  _hideGameMessage: ->
-    @log 'destroy game message'
+  _clearGameMessage: ->
+    @log 'clear game message'
     if @gameMessage
       @gameMessage.destroy()
       @gameMessage = null
 
-  _hideClickableDialogOptions: ->
-    @log 'destroy clickable dialog option'
+  _clearClickableDialogOptions: ->
+    @log 'clear clickable dialog options'
     for clickableOption in @clickableOptions
       clickableOption.destroy()
     @clickableOptions = []
+    for thumbnail in @clickableOptionThumbnails
+      thumbnail.destroy()
+    @clickableOptionThumbnails = []
 
   # --------------------------------------------------------------------------------------------------------------------
 
@@ -34,7 +38,7 @@ class GUIManager
     return zoom / 2
 
   displayGameMessage: (phaserInstance, message) ->
-    @_hideGameMessage()
+    @_clearGameMessage()
 
     @log message
     @gameMessage = phaserInstance.add.text(
@@ -55,23 +59,27 @@ class GUIManager
     @gameMessage.setOrigin(0.0).setScrollFactor(0)
 
   displayClickableDialogOptions: (phaserInstance, preamble, options) ->
-    @_hideClickableDialogOptions()
+    @_clearClickableDialogOptions()
     @displayGameMessage(phaserInstance, preamble)
-    console.log
-
     i = 1
     options.reverse()
+    offsety_each = 30
     for option in options
-      message = option.message
+      callback = =>
+        @_clearGameMessage()
+        @_clearClickableDialogOptions()
+        optionCallback = window.roguehack.Constant.NULL_CALLBACK
+        if option.callback
+          optionCallback = option.callback
+        optionCallback()
 
       offsetx = @messageOffsetX
-      offsety = phaserInstance.sys.canvas.height - (30 * i)
+      offsety = phaserInstance.sys.canvas.height - (offsety_each * i)
       i += 1
-
       clickableOption = phaserInstance.add.text(
         offsetx
         offsety
-        '> ' + message
+        '> ' + option.message
         fontFamily: @MESSAGE_FONT_FAMILY
         fontSize: @MESSAGE_FONT_SIZE + 'px'
         padding:
@@ -81,16 +89,19 @@ class GUIManager
         fill: '#000'
       )
       clickableOption.setOrigin(0).setScrollFactor(0).setInteractive()
-      callback = =>
-        @_hideGameMessage()
-        @_hideClickableDialogOptions()
-        optionCallback = window.roguehack.Constant.NULL_CALLBACK
-        if option.callback
-          optionCallback = option.callback
-        optionCallback()
-
       clickableOption.on('pointerdown', callback)
       @clickableOptions.push(clickableOption)
+
+      if option.thumbnail
+        thumbnail = phaserInstance.add.image(
+          offsetx + 10
+          offsety
+          option.thumbnail
+        )
+        thumbnail.setOrigin(0).setScrollFactor(0).setInteractive()
+        thumbnail.on('pointerdown', callback)
+        @clickableOptionThumbnails.push(thumbnail)
+
 
 
 module.exports = GUIManager

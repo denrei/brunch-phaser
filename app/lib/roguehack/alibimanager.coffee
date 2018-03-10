@@ -135,15 +135,15 @@ class AlibiManager
       for characterId in characterIds
         options_depth_1.push({
           thumbnail: characterId
-          message: characterId.toUpperCase()
+          message: characterId.toUpperCase().padEnd(6)
         })
       options_depth_1.push({
         message: @MESSAGE_GOODBYE
       })
 
       preamble_depth_1 = ''
-      preamble_depth_1 = window.roguehack.Constant.ID_NPC_CHIEF + ":\n"
-      preamble_depth_1 = 'Here are the suspects.'
+      preamble_depth_1 += window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ":\n"
+      preamble_depth_1 += 'Here are the usual suspects.'
       @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_1, options_depth_1)
 
     options_depth_0 = []
