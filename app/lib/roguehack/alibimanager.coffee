@@ -82,7 +82,7 @@ class AlibiManager
     @NULL_ALIBI_CHIEF = new window.roguehack.Alibi('', window.roguehack.Constant.ID_NPC_CHIEF, '', '', '', '')
     @MESSAGE_GOODBYE = "Goodbye"
     @MESSAGE_CONTINUE = "Next"
-    @MESSAGE_SCENARIO_DESCRIPTION = "Just got this report.  There was a murder last night.  Which also happened to be an attempted murder.  Gunther Carlson's clone was was shot dead last night at 11:10PM in Mr. Carlson's estate.  It's clear the real target was billionaire Carlson himself.  We have to find this killer quick.  Clones' lives are expendable.  His is not.  We've spoken with Carlson, who was doing a lot of finger pointing.  Of those he accused, here is who we've narrowed it down to..."
+    @MESSAGE_SCENARIO_DESCRIPTION = "Just got this report.  There was a murder last night.  Gunther Carlson's clone was was shot dead last night at 11:10PM in Mr. Carlson's estate.\n\nIt's clear the real target was billionaire Carlson himself.  Clones' lives are expendable.  His is not.  We've spoken with Carlson, who was doing a lot of finger pointing.  Here are the primary suspects..."
     @alibis = []
     @count_abilis_assigned = 0
     @count_abilis_false = 0
@@ -140,10 +140,7 @@ class AlibiManager
       options_depth_1.push({
         message: @MESSAGE_GOODBYE
       })
-
       preamble_depth_1 = ''
-      preamble_depth_1 += window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ":\n"
-      preamble_depth_1 += 'Here are the usual suspects.'
       @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_1, options_depth_1)
 
     options_depth_0 = []

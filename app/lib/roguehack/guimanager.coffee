@@ -1,12 +1,15 @@
 class GUIManager
 
-  MESSAGE_FONT_SIZE: 14
+  MESSAGE_PADDING: 12
+  MESSAGE_FONT_SIZE: 16
   MESSAGE_FONT_FAMILY: window.roguehack.Constant.FONT
+  MESSAGE_FONT_WEIGHT: 16
 
   gameMessage: null
   clickableOptions: []
   clickableOptionThumbnails: []
-  messageOffsetX: 16
+  messageOffsetX: 4
+  messageOffsetY: 4
 
   _clearGameMessage: ->
     @log 'clear game message'
@@ -43,18 +46,18 @@ class GUIManager
     @log message
     @gameMessage = phaserInstance.add.text(
       @messageOffsetX
-      @messageOffsetX
+      @messageOffsetY
       message
       fontFamily: @MESSAGE_FONT_FAMILY
       fontSize: @MESSAGE_FONT_SIZE + 'px'
       padding:
-        x: 10
-        y: 5
+        x: @MESSAGE_PADDING
+        y: @MESSAGE_PADDING
       backgroundColor: '#eee'
       fill: '#000'
       wordWrap:
-        width: window.game.canvas.width - (2 * @messageOffsetX)
-        useAdvancedWrap: true
+        width: window.game.canvas.width - (3 * @messageOffsetX)
+        useAdvancedWrap: false
     )
     @gameMessage.setOrigin(0.0).setScrollFactor(0)
 
@@ -63,7 +66,7 @@ class GUIManager
     @displayGameMessage(phaserInstance, preamble)
     i = 1
     options.reverse()
-    offsety_each = 30
+    offsety_each = 49
     for option in options
       callback = =>
         @_clearGameMessage()
@@ -83,8 +86,8 @@ class GUIManager
         fontFamily: @MESSAGE_FONT_FAMILY
         fontSize: @MESSAGE_FONT_SIZE + 'px'
         padding:
-          x: 10
-          y: 5
+          x: @MESSAGE_PADDING
+          y: @MESSAGE_PADDING
         backgroundColor: '#eee'
         fill: '#000'
       )
@@ -95,7 +98,7 @@ class GUIManager
       if option.thumbnail
         thumbnail = phaserInstance.add.image(
           offsetx + 10
-          offsety
+          offsety + 4
           option.thumbnail
         )
         thumbnail.setOrigin(0).setScrollFactor(0).setInteractive()

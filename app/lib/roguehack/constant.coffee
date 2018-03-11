@@ -3,7 +3,7 @@ Constant =
   CANVAS_WIDTH_NATIVE: 500
   CANVAS_HEIGHT_NATIVE: 300
   DEBUG: true
-  FONT: 'Courier, monospace'
+  FONT: 'mono'
   PATH_DATA: './data/'
   ID_NPC_CHIEF: 'chief' # string must match string in tilemap json
   ID_NPC_DABYL: 'dabyl'
