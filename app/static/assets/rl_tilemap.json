@@ -28,6 +28,17 @@
          "name":"Object Layer 1",
          "objects":[
                 {
+                  "height":12,
+                  "id":1,
+                  "name":"chief",
+                  "rotation":0,
+                  "type":"",
+                  "visible":true,
+                  "width":12,
+                  "x":300,
+                  "y":180
+                },
+                {
                  "height":12,
                  "id":1,
                  "name":"dabyl",
@@ -70,7 +81,19 @@
                  "width":12,
                  "x":101.666666666667,
                  "y":-45.3333333333333
-                }],
+                },
+                 {
+                   "height":12,
+                   "id":1,
+                   "name":"vera",
+                   "rotation":0,
+                   "type":"",
+                   "visible":true,
+                   "width":12,
+                   "x":800,
+                   "y":260
+                 }
+         ],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,

@@ -81,7 +81,7 @@ module.exports =
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
 
-    @playerSprite = @matter.add.sprite 256, 256, 'playerAnim'
+    @playerSprite = @matter.add.sprite 100, 200, 'playerAnim'
 #    @playerSprite.play('idle-fwd');
     @playerSprite.setCircle()
     # Set Initial Destination to Player Spawn Point
@@ -174,14 +174,15 @@ module.exports =
 
 
   update: (timestep, dt) ->
-    speed = 0.03
+    speed = 0.05
     xDistance = Phaser.Math.Clamp((@navLocation.x - @playerSprite.x) * 99999, -speed, speed) * dt
     yDistance = Phaser.Math.Clamp((@navLocation.y - @playerSprite.y) * 99999, -speed, speed) * dt
     @playerSprite.x += xDistance
     @playerSprite.y += yDistance
 
     # If Player Distance to Destination gets VERYYYY short...
-    if Math.abs(xDistance.toFixed(2)) < 0.05 && Math.abs(yDistance.toFixed(2)) < 0.05
+    radius_destination = 0.05
+    if Math.abs(xDistance.toFixed(2)) < radius_destination && Math.abs(yDistance.toFixed(2)) < radius_destination
       @playerSprite.anims.play("idle_front") # Play Idle Animation
       @navLocation =
         x: @playerSprite.x
