@@ -35,37 +35,6 @@ module.exports =
     map = @make.tilemap(key: 'map')
     tileset = map.addTilesetImage('rl_tileset', 'tiles', 32, 32) # First Argument is the name of Tileset referenced in Tilemap JSON
 
-    # Define NPC Objects
-    alibiManager = new window.roguehack.AlibiManager(this, 5)
-    npc_chief = {}
-    npc_dabyl = {}
-    npc_ivika = {}
-    npc_sivan = {}
-    npc_ton = {}
-    npc_vera = {}
-
-    # Loop Through Tile Map Object Layer. If Object Name matches (NPC) Game Object,
-    # Assign TileMap Coordinates to Game Object Position
-    for e, i in map.objects[0].objects
-      if e.name == window.roguehack.Constant.ID_NPC_CHIEF
-        npc_chief.x = e.x
-        npc_chief.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_DABYL
-        npc_dabyl.x = e.x
-        npc_dabyl.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_IVIKA
-        npc_ivika.x = e.x
-        npc_ivika.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_SIVAN
-        npc_sivan.x = e.x
-        npc_sivan.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_TON
-        npc_ton.x = e.x
-        npc_ton.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_VERA
-        npc_vera.x = e.x
-        npc_vera.y = e.y
-
     #Create layer(s) w/ collision tiles
     layer = map.createStaticLayer(0, tileset, 0, 32)
     layer2 = map.createStaticLayer(1, tileset, 0, 32)
@@ -103,6 +72,35 @@ module.exports =
     createAnim 'walk_left', 13, 16
     @playerSprite.anims.play('idle_front');
 
+    # Define NPC Objects
+    alibiManager = new window.roguehack.AlibiManager(this, 5)
+    npc_chief = {}
+    npc_dabyl = {}
+    npc_ivika = {}
+    npc_sivan = {}
+    npc_ton = {}
+    npc_vera = {}
+    # Loop Through Tile Map Object Layer. If Object Name matches (NPC) Game Object,
+    # Assign TileMap Coordinates to Game Object Position
+    for e, i in map.objects[0].objects
+      if e.name == window.roguehack.Constant.ID_NPC_CHIEF
+        npc_chief.x = e.x
+        npc_chief.y = e.y
+      else if e.name == window.roguehack.Constant.ID_NPC_DABYL
+        npc_dabyl.x = e.x
+        npc_dabyl.y = e.y
+      else if e.name == window.roguehack.Constant.ID_NPC_IVIKA
+        npc_ivika.x = e.x
+        npc_ivika.y = e.y
+      else if e.name == window.roguehack.Constant.ID_NPC_SIVAN
+        npc_sivan.x = e.x
+        npc_sivan.y = e.y
+      else if e.name == window.roguehack.Constant.ID_NPC_TON
+        npc_ton.x = e.x
+        npc_ton.y = e.y
+      else if e.name == window.roguehack.Constant.ID_NPC_VERA
+        npc_vera.x = e.x
+        npc_vera.y = e.y
     createNpcSprite = (image_id, alibiManager, x, y) =>
       npcSprite = @matter.add.image x, y, image_id
       npcSprite.body.isStatic = true
