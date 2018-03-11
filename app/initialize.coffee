@@ -4,7 +4,7 @@ guiManager = new window.roguehack.GUIManager
 window.game = new Phaser.Game
   width: window.roguehack.Constant.CANVAS_WIDTH_NATIVE
   height: window.roguehack.Constant.CANVAS_HEIGHT_NATIVE
-  zoom: guiManager.getViewportZoom()
+  zoom: guiManager.getViewportZoom_Continuous()
   # resolution: 1
   # type: Phaser.AUTO
   # parent: null

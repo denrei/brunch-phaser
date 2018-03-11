@@ -32,13 +32,20 @@ class GUIManager
     if window.roguehack.Constant.DEBUG
       console.log message
 
-  getViewportZoom: ->
+  getViewportZoom_NiceRatio: ->
+    zoomIncrement = 2
     zoom = 1
     width = window.roguehack.Constant.CANVAS_WIDTH_NATIVE
     while width < window.innerWidth
-      width *= 2
-      zoom *= 2
-    return zoom / 2
+      width *= zoomIncrement
+      zoom *= zoomIncrement
+    return zoom / zoomIncrement
+
+  getViewportZoom_Continuous: ->
+    zoom = window.innerWidth / window.roguehack.Constant.CANVAS_WIDTH_NATIVE
+    if window.innerHeight < (zoom * window.roguehack.Constant.CANVAS_HEIGHT_NATIVE)
+      zoom = window.innerHeight / window.roguehack.Constant.CANVAS_HEIGHT_NATIVE
+    return zoom.toFixed(1)
 
   displayGameMessage: (phaserInstance, message) ->
     @_clearGameMessage()
