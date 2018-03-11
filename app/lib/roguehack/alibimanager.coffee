@@ -86,6 +86,7 @@ class AlibiManager
     @alibis = []
     @count_abilis_assigned = 0
     @count_abilis_false = 0
+    @isFirstConversationWithChief = true
 
     @phaserInstance = phaserInstance
     @numberOfSuspects = numberOfSuspects
@@ -137,16 +138,19 @@ class AlibiManager
       options_depth_1.push({
         message: @MESSAGE_GOODBYE
       })
-      preamble_depth_1 = ''
+      preamble_depth_1 = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ':\n' + 'Here are the usual suspects.'
       @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_1, options_depth_1)
 
+    preamble_depth_0 = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ':\n' + @MESSAGE_SCENARIO_DESCRIPTION
     options_depth_0 = []
     options_depth_0.push({
       message: @MESSAGE_CONTINUE
       callback: callback_depth_1
     })
-
-    preamble_depth_0 = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ':\n' + @MESSAGE_SCENARIO_DESCRIPTION
-    @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_0, options_depth_0)
+    if @isFirstConversationWithChief
+      @isFirstConversationWithChief = false
+      @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_0, options_depth_0)
+      return
+    callback_depth_1()
 
 module.exports = AlibiManager
