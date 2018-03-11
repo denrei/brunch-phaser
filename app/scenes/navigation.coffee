@@ -82,8 +82,8 @@ module.exports =
     @cameras.main.setScroll 95, 100
 
     @playerSprite = @matter.add.sprite 100, 200, 'playerAnim'
-#    @playerSprite.play('idle-fwd');
-    @playerSprite.setCircle()
+    radius_playerCollider = 10
+    @playerSprite.setCircle(radius_playerCollider)
     # Set Initial Destination to Player Spawn Point
     @navLocation =
       x: @playerSprite.x

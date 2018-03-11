@@ -27,6 +27,17 @@
          "draworder":"topdown",
          "name":"Object Layer 1",
          "objects":[
+               {
+                 "height":12,
+                 "id":1,
+                 "name":"chief",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":12,
+                 "x":300,
+                 "y":180
+               },
                 {
                  "height":12,
                  "id":1,
