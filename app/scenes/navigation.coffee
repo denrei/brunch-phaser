@@ -1,12 +1,9 @@
-@navLocation = {} # Globalize @navLocation so that it can be refernced during Create() I'm sorryyyyy!
-
 module.exports =
 
   key: 'navigation'
 
   init: (data) ->
     console.log 'init', data, this
-    @navLocation = new Phaser.Geom.Point()
 
   preload: ->
     @load.image 'tile', 'street_X_YTiling.png'
@@ -49,28 +46,6 @@ module.exports =
 
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
-
-    @playerSprite = @matter.add.sprite 100, 200, 'playerAnim'
-    radius_playerCollider = 10
-    @playerSprite.setCircle(radius_playerCollider)
-    # Set Initial Destination to Player Spawn Point
-    @navLocation =
-      x: @playerSprite.x
-      y: @playerSprite.y
-
-    createAnim = (name, start, end ) =>
-      @anims.create
-        key: name
-        frames: @anims.generateFrameNumbers('playerAnim', { start: start, end: end })
-        frameRate: 8
-        repeat: -1
-
-    createAnim 'idle_front', 2,2
-    createAnim 'idle_back', 0, 0
-    createAnim 'walk_back', 3, 6
-    createAnim 'walk_fwd', 8, 11
-    createAnim 'walk_left', 13, 16
-    @playerSprite.anims.play('idle_front');
 
     # Define NPC Objects
     alibiManager = new window.roguehack.AlibiManager(this, 5)
@@ -120,98 +95,22 @@ module.exports =
     layer3.setCollisionByProperty({ collides: true })
     @matter.world.convertTilemapLayer(layer3)
 
-    # Input
-    @keys = @input.keyboard.createCursorKeys()
-    @input.on 'pointerdown', (pointer) =>
-      cam = pointer.camera
-      @navLocation =
-        x: Math.floor(pointer.x + cam.scrollX)
-        y: Math.floor(pointer.y + cam.scrollY)
-      updateAnimation()
 
-    updateAnimation = =>
-      vert = (@navLocation.y - @playerSprite.y)
-      hori = (@navLocation.x - @playerSprite.x)
-      if vert * vert > hori * hori
-        if @navLocation.y < @playerSprite.y
-          @playerSprite.anims.play('walk_back')
-        else
-          @playerSprite.anims.play('walk_fwd')
-      else
-        if @navLocation.x < @playerSprite.x
-          @playerSprite.scaleX = -1
-          @playerSprite.anims.play('walk_left')
-        else
-          @playerSprite.scaleX = 1
-          @playerSprite.anims.play('walk_left')
+    ### Player must be created AFTER world physics are established...
 
-    # Player Idle Animation and Stop Movement if Collision with Wall, etc.
-    @matter.world.on 'collisionstart', (event, bodyA, bodyB) ->
-      console.log("Collide")
-      # console.log("bodyA:")
-      # console.log(bodyA.gameObject)
-      # console.log("bodyB:")
-      # console.log(bodyB.gameObject)
-
-      # Detect if body has animations. Sometimes Player is bodyB.
-      # Other times player is Body A. (I dont't know why)
-      if bodyB.gameObject.anims
-        bodyB.gameObject.anims.play("idle_front")
-        @navLocation =
-          x: bodyB.gameObject.x
-          y: bodyB.gameObject.y
-        return
-      bodyA.gameObject.anims.play("idle_front")
-      @navLocation =
-        x: bodyA.gameObject.x
-        y: bodyA.gameObject.y
-      if bodyB.gameObject.name == window.roguehack.Constant.ID_NPC_CHIEF
-        alibiManager.handleDialogWithChief(bodyB)
-        return
-      alibiManager.displayAlibiForBody(bodyB)
+    ###
+    playerSprite = @matter.add.sprite 100, 200, 'playerAnim'
+    input = new window.roguehack.Input(@input)
+    @player = new window.roguehack.Player(playerSprite, input, @anims)
+    @cam = new window.roguehack.Camera(@cameras.main, @player)
 
 
   update: (timestep, dt) ->
-    speed = 0.05
-    xDistance = Phaser.Math.Clamp((@navLocation.x - @playerSprite.x) * 99999, -speed, speed) * dt
-    yDistance = Phaser.Math.Clamp((@navLocation.y - @playerSprite.y) * 99999, -speed, speed) * dt
-    @playerSprite.x += xDistance
-    @playerSprite.y += yDistance
-
-    # If Player Distance to Destination gets VERYYYY short...
-    radius_destination = 0.05
-    if Math.abs(xDistance.toFixed(2)) < radius_destination && Math.abs(yDistance.toFixed(2)) < radius_destination
-      @playerSprite.anims.play("idle_front") # Play Idle Animation
-      @navLocation =
-        x: @playerSprite.x
-        y: @playerSprite.y
-
-    cam = @cameras.main
-    camScrollTarget =
-      x: @playerSprite.x - cam.width *0.5
-      y: @playerSprite.y - cam.height *0.5
-
-    Phaser.Time.Clock
-    #Follow player
-    interp = Phaser.Math.Interpolation.Linear
-    scrollX = Math.floor(interp([cam.scrollX, camScrollTarget.x], @CameraFollowLerp))
-    scrollY = Math.floor(interp([cam.scrollY, camScrollTarget.y], @CameraFollowLerp))
-    cam.setScroll(scrollX, scrollY)
-
-  # directionalMove: ->
-  #   return
-  # if @keys.up.isDown
-  #   @matterPlayer.setVelocityY(-5)
-  # if @keys.down.isDown
-  #   @matterPlayer.setVelocityY(5)
-  # if @keys.left.isDown
-  #   @matterPlayer.setVelocityX(-5)
-  # if @keys.right.isDown
-  #   @matterPlayer.setVelocityX(5)
+    @player.update(dt)
+    @cam.update(dt)
 
   extend:
     MoveSpeed: 0.001
-    CameraFollowLerp: 0.02
 
     quit: ->
       @scene.start 'menu', score: @score
