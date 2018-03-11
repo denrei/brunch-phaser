@@ -114,9 +114,6 @@ class AlibiManager
 
     options = []
     options.push({
-      message: 'Accuse suspect'
-    })
-    options.push({
       message: @MESSAGE_GOODBYE
     })
     @guiManager.displayClickableDialogOptions(@phaserInstance, preamble, options)
