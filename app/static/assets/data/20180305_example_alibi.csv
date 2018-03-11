@@ -1,4 +1,0 @@
-id_alibi,message_suspect,id_witness1,message_confirm_witness1,message_unclear_witness1
-DRINKING,I was drinking at the bar.,BARTENDER,"Yeah, %s was here all night. ",I haven't seen %s for weeks.
-GAMBLING,I was gambling with some buddies.,FRIEND,%s cleaned me out at the casino!,%s never showed up to gamble. 
-DINNER_AT_HOME,I was at home having dinner with my family.,SPOUSE,We had dinner and called it a night.,"No, and I'm not gonna to lie for them!"
