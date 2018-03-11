@@ -67,7 +67,12 @@ class AlibiManager
     alibis_unshuffled[subscript_falseAlibi].setIsAlibiTruthful(false)
     @alibis = @_shuffleArray(alibis_unshuffled)
 
-  _accuseSuspect: (alibi) ->
+  _accuseSuspect: (id_suspect) ->
+    alibi = @_getAlibiForSuspect(id_suspect)
+
+    #TODO: chief asks if player is sure
+
+    @guiManager.log 'player accuses ' + id_suspect
     if alibi.getIsAlibiTruthful()
       @guiManager.displayGameMessage(@phaserInstance, 'You lose! You wrongfully accused ' + alibi.getId_Suspect().toUpperCase() + ".")
       return
@@ -122,7 +127,7 @@ class AlibiManager
   handleDialogWithChief: ->
 
     callback_depth_1 = =>
-      characterIds = [
+      suspectIds = [
         window.roguehack.Constant.ID_NPC_DABYL,
         window.roguehack.Constant.ID_NPC_IVIKA,
         window.roguehack.Constant.ID_NPC_SIVAN,
@@ -130,10 +135,12 @@ class AlibiManager
         window.roguehack.Constant.ID_NPC_VERA,
       ]
       options_depth_1 = []
-      for characterId in characterIds
+      for suspectId in suspectIds
         options_depth_1.push({
-          thumbnail: characterId
-          message: characterId.toUpperCase().padEnd(6)
+          thumbnail: suspectId
+          message: suspectId.toUpperCase().padEnd(6)
+          callback: =>
+            @_accuseSuspect(suspectId)
         })
       options_depth_1.push({
         message: @MESSAGE_GOODBYE
