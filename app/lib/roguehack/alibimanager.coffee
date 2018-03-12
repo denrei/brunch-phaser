@@ -106,10 +106,10 @@ class AlibiManager
     AlibiManager.alibis[AlibiManager.count_abilis_assigned].setId_Suspect(id_suspect)
     AlibiManager.count_abilis_assigned += 1
 
-  displayAlibiForBody: (collidedBody=null,  suspect_id=null) ->
+  displayAlibiForBody: (suspect_id) ->
     message = 'ouch'
     AlibiManager.guiManager.log 'checking alibi for collided body'
-    alibi = AlibiManager._getAlibiForSuspect(collidedBody.gameObject.name or suspect_id)
+    alibi = AlibiManager._getAlibiForSuspect(suspect_id)
     if !alibi
       AlibiManager.guiManager.displayGameMessage(AlibiManager.phaserInstance, message)
       return
@@ -121,6 +121,7 @@ class AlibiManager
     options = []
     options.push({
       message: AlibiManager.MESSAGE_GOODBYE
+      callback: window.roguehack.Constant.NULL_CALLBACK
     })
     AlibiManager.guiManager.displayClickableDialogOptions(AlibiManager.phaserInstance, preamble, options)
 

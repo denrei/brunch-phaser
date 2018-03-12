@@ -50,7 +50,7 @@ class Npc
         if s.touching
           return
         s.touching = true
-        alibiFunction(null,  npcSprite.name)
+        alibiFunction(npcSprite.name)
       s.untouched = =>
         s.touching = false
 

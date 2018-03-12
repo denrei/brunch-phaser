@@ -30,7 +30,7 @@ module.exports =
     @sound.audioPlayDelay = 0.1;
     @sound.loopEndOffset = 0.05;
     bgMusic  = @sound.add('bg_music')
-    # bgMusic.play()
+    bgMusic.play()
     bgClouds = @add.tileSprite 0, -20, 5000, 320, 'bg_clouds'
     bgClouds.setScale 1.1
     # Create tile map
