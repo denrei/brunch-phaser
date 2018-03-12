@@ -42,8 +42,11 @@ class PlayerPhysics
     speed = 0.05
     xDistance = Phaser.Math.Clamp((@navLocation.x - @playerSprite.x) * 99999, -speed, speed) * dt
     yDistance = Phaser.Math.Clamp((@navLocation.y - @playerSprite.y) * 99999, -speed, speed) * dt
-    @playerSprite.x += xDistance
-    @playerSprite.y += yDistance
+
+    @playerSprite.setVelocityX(xDistance);
+    @playerSprite.setVelocityY(yDistance);
+#    @playerSprite.x += xDistance
+#    @playerSprite.y += yDistance
 
     # If Player Distance to Destination gets VERYYYY short...
     radius_destination = 0.05

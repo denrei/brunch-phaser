@@ -79,7 +79,9 @@ class Npc
       distXSq = distX * distX
       distYSq = distY * distY
       if distXSq < collisionDistanceSq and distYSq < collisionDistanceSq
-        npc.touched(player)
+        npc.touched()
+      else
+        npc.untouched()
 
 
 module.exports = Npc
