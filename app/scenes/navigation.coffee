@@ -47,48 +47,6 @@ module.exports =
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
 
-    # Define NPC Objects
-    alibiManager = new window.roguehack.AlibiManager(this, 5)
-    npc_chief = {}
-    npc_dabyl = {}
-    npc_ivika = {}
-    npc_sivan = {}
-    npc_ton = {}
-    npc_vera = {}
-    # Loop Through Tile Map Object Layer. If Object Name matches (NPC) Game Object,
-    # Assign TileMap Coordinates to Game Object Position
-    for e, i in map.objects[0].objects
-      if e.name == window.roguehack.Constant.ID_NPC_CHIEF
-        npc_chief.x = e.x
-        npc_chief.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_DABYL
-        npc_dabyl.x = e.x
-        npc_dabyl.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_IVIKA
-        npc_ivika.x = e.x
-        npc_ivika.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_SIVAN
-        npc_sivan.x = e.x
-        npc_sivan.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_TON
-        npc_ton.x = e.x
-        npc_ton.y = e.y
-      else if e.name == window.roguehack.Constant.ID_NPC_VERA
-        npc_vera.x = e.x
-        npc_vera.y = e.y
-    createNpcSprite = (image_id, alibiManager, x, y) =>
-      npcSprite = @matter.add.image x, y, image_id
-      npcSprite.body.isStatic = true
-      npcSprite.name = image_id
-      if alibiManager
-        alibiManager.assignAlibi(npcSprite.name)
-    createNpcSprite(window.roguehack.Constant.ID_NPC_CHIEF, null, npc_chief.x, npc_chief.y)
-    createNpcSprite(window.roguehack.Constant.ID_NPC_DABYL, alibiManager, npc_dabyl.x, npc_dabyl.y)
-    createNpcSprite(window.roguehack.Constant.ID_NPC_IVIKA, alibiManager, npc_ivika.x, npc_ivika.y)
-    createNpcSprite(window.roguehack.Constant.ID_NPC_SIVAN, alibiManager, npc_sivan.x, npc_sivan.y)
-    createNpcSprite(window.roguehack.Constant.ID_NPC_TON, alibiManager, npc_ton.x, npc_ton.y)
-    createNpcSprite(window.roguehack.Constant.ID_NPC_VERA, alibiManager, npc_vera.x, npc_vera.y)
-
 
     # Create Top Level TileMap Layer (for objects that overlap NPCs)
     layer3 = map.createStaticLayer(2, tileset, 0, 32)
@@ -96,13 +54,12 @@ module.exports =
     @matter.world.convertTilemapLayer(layer3)
 
 
-    ### Player must be created AFTER world physics are established...
-
-    ###
+    #Player must be created AFTER world physics are established...
     playerSprite = @matter.add.sprite 100, 200, 'playerAnim'
     input = new window.roguehack.Input(@input)
     @player = new window.roguehack.Player(playerSprite, input, @anims)
     @cam = new window.roguehack.Camera(@cameras.main, @player)
+    npc = new window.roguehack.Npc(@, @player, map)
 
 
   update: (timestep, dt) ->
