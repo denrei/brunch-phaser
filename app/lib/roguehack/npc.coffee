@@ -60,9 +60,9 @@ class Npc
       npcSprite.body.isStatic = true
       npcSprite.name = image_id
       @npcs.push(npcSprite)
-
       if needs_alibai
         createTouchedNotifications(npcSprite,  alibiManager.displayAlibiForBody)
+        alibiManager.assignAlibi(image_id)
       else
         createTouchedNotifications(npcSprite,  alibiManager.handleDialogWithChief)
 
