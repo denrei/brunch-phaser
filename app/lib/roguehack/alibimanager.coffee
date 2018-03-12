@@ -139,25 +139,25 @@ class AlibiManager
         options_depth_1.push({
           thumbnail: suspectId
           message: suspectId.toUpperCase().padEnd(6)
-          callback: =>
-            @_accuseSuspect(suspectId)
+          callback: => @_accuseSuspect(suspectId)
         })
       options_depth_1.push({
         message: @MESSAGE_GOODBYE
+        callback: window.roguehack.Constant.NULL_CALLBACK
       })
       preamble_depth_1 = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ':\n' + 'Here are the usual suspects.'
       @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_1, options_depth_1)
 
-    preamble_depth_0 = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ':\n' + @MESSAGE_SCENARIO_DESCRIPTION
-    options_depth_0 = []
-    options_depth_0.push({
-      message: @MESSAGE_CONTINUE
-      callback: callback_depth_1
-    })
-    if @isFirstConversationWithChief
-      @isFirstConversationWithChief = false
-      @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_0, options_depth_0)
-      return
+#    preamble_depth_0 = window.roguehack.Constant.ID_NPC_CHIEF.toUpperCase() + ':\n' + @MESSAGE_SCENARIO_DESCRIPTION
+#    options_depth_0 = []
+#    options_depth_0.push({
+#      message: @MESSAGE_CONTINUE
+#      callback: callback_depth_1
+#    })
+#    if @isFirstConversationWithChief
+#      @isFirstConversationWithChief = false
+#      @guiManager.displayClickableDialogOptions(@phaserInstance, preamble_depth_0, options_depth_0)
+#      return
     callback_depth_1()
 
 module.exports = AlibiManager

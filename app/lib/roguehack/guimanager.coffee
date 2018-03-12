@@ -26,7 +26,7 @@ class GUIManager
       thumbnail.destroy()
     @clickableOptionThumbnails = []
 
-  # --------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------------------------------
 
   log: (message) ->
     if window.roguehack.Constant.DEBUG
@@ -73,34 +73,29 @@ class GUIManager
     @displayGameMessage(phaserInstance, preamble)
     i = 1
     options.reverse()
-    offsety_each = 49
+    offsety_each = 60
     for option in options
-      callback = =>
-        @_clearGameMessage()
-        @_clearClickableDialogOptions()
-        optionCallback = window.roguehack.Constant.NULL_CALLBACK
-        if option.callback
-          optionCallback = option.callback
-        optionCallback()
-
       offsetx = @messageOffsetX
       offsety = phaserInstance.sys.canvas.height - (offsety_each * i)
       i += 1
-      clickableOption = phaserInstance.add.text(
-        offsetx
-        offsety
-        '> ' + option.message
-        fontFamily: @MESSAGE_FONT_FAMILY
-        fontSize: @MESSAGE_FONT_SIZE + 'px'
-        padding:
-          x: @MESSAGE_PADDING
-          y: @MESSAGE_PADDING
-        backgroundColor: '#eee'
-        fill: '#000'
+      @clickableOptions.push(
+        phaserInstance.add.text(
+          offsetx
+          offsety
+          '> ' + option.message
+          fontFamily: @MESSAGE_FONT_FAMILY
+          fontSize: @MESSAGE_FONT_SIZE + 'px'
+          padding:
+            x: @MESSAGE_PADDING
+            y: @MESSAGE_PADDING
+          backgroundColor: '#eee'
+          fill: '#000'
+        ).setOrigin(0).setScrollFactor(0).setInteractive().on('pointerdown', =>
+          @_clearGameMessage()
+          @_clearClickableDialogOptions()
+          option.callback()
+        )
       )
-      clickableOption.setOrigin(0).setScrollFactor(0).setInteractive()
-      clickableOption.on('pointerdown', callback)
-      @clickableOptions.push(clickableOption)
 
       if option.thumbnail
         thumbnail = phaserInstance.add.image(
@@ -109,9 +104,6 @@ class GUIManager
           option.thumbnail
         )
         thumbnail.setOrigin(0).setScrollFactor(0).setInteractive()
-        thumbnail.on('pointerdown', callback)
         @clickableOptionThumbnails.push(thumbnail)
-
-
 
 module.exports = GUIManager
