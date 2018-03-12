@@ -80,7 +80,7 @@ class AlibiManager
 
   # --------------------------------------------------------------------------------------------------------------------
 
-  constructor: (phaserInstance, numberOfSuspects)->
+  constructor: (@phaserInstance, @numberOfSuspects)->
     @COMMA_PLACEHOLDER = "|"
     @NEWLINE = "\r\n" # thanks Google Drive
 
@@ -93,8 +93,6 @@ class AlibiManager
     @count_abilis_false = 0
     @isFirstConversationWithChief = true
 
-    @phaserInstance = phaserInstance
-    @numberOfSuspects = numberOfSuspects
     @guiManager = new window.roguehack.GUIManager()
 
     @_initializeAlibis()
@@ -106,10 +104,10 @@ class AlibiManager
     @alibis[@count_abilis_assigned].setId_Suspect(id_suspect)
     @count_abilis_assigned += 1
 
-  displayAlibiForBody: (collidedBody) ->
+  displayAlibiForBody: (collidedBody=null,  suspect_id=null) ->
     message = 'ouch'
     @guiManager.log 'checking alibi for collided body'
-    alibi = @_getAlibiForSuspect(collidedBody.gameObject.name)
+    alibi = @_getAlibiForSuspect(collidedBody.gameObject.name or suspect_id)
     if !alibi
       @guiManager.displayGameMessage(@phaserInstance, message)
       return

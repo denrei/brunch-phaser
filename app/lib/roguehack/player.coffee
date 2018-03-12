@@ -22,10 +22,7 @@ class PlayerPhysics
   constructor: (@playerSprite, inputEvent) ->
     @navLocation = new Phaser.Geom.Point(@playerSprite.x, @playerSprite.y)
     inputEvent.add (args...) => @handleInputChanged(args...)
-
-#    @playerSprite.setCircle(10)
-#    @setUpWorldCollision()
-
+    @playerSprite.setCircle(10)
     @physicsChanged = new window.roguehack.Event
 
   getPlayerPhysicsEvent: =>
@@ -37,26 +34,9 @@ class PlayerPhysics
   getY: ->
     return @playerSprite.y
 
-  setUpWorldCollision: =>
-    @matter.world.on 'collisionstart', (event, bodyA, bodyB) ->
-      console.log("Collide")
-      if bodyB.gameObject.anims
-        bodyB.gameObject.anims.play("idle_front")
-        @navLocation =
-          x: bodyB.gameObject.x
-          y: bodyB.gameObject.y
-        return
-      bodyA.gameObject.anims.play("idle_front")
-      @navLocation =
-        x: bodyA.gameObject.x
-        y: bodyA.gameObject.y
-      if bodyB.gameObject.name == window.roguehack.Constant.ID_NPC_CHIEF
-        alibiManager.handleDialogWithChief(bodyB)
-        return
-      alibiManager.displayAlibiForBody(bodyB)
-
   handleInputChanged: ({screen, world}) ->
     @navLocation = world
+    @physicsChanged.call()
 
   update: (dt) ->
     speed = 0.05
@@ -72,14 +52,15 @@ class PlayerPhysics
       @navLocation =
         x: @playerSprite.x
         y: @playerSprite.y
-
-    @physicsChanged.call()
+    @physicsChanged.call(dt)
 
 class PlayerAnimation
 
   constructor: (@playerSprite, @playerPhysics, anims) ->
     @createAnimations anims
-    @playerPhysics.getPlayerPhysicsEvent().add => @updateAnimationState
+    @playerPhysics.getPlayerPhysicsEvent().add (dt) =>
+      if not dt?
+        @updateAnimationState()
     @animStateRules =      ## use body.facing ???
       "action": => not playerPhysics.isOnFloor
       "walk": => input.rightInput or input.leftInput
@@ -92,13 +73,13 @@ class PlayerAnimation
       'walk_back': [3, 6]
       'walk_fwd': [8, 11]
       'walk_left': [13, 16]
-
     for name, start_end of animationList
       anims.create
         key: name
         frames: anims.generateFrameNumbers('playerAnim', {start: start_end[0], end: start_end[1]})
         frameRate: 8
         repeat: -1
+
   updateAnimationState: ->
     navLocation = @playerPhysics.getNavLocation()
 
