@@ -52,13 +52,6 @@ module.exports =
     @cameras.main.setBounds 0, 0, map.widthInPixels, map.heightInPixels
     @cameras.main.setScroll 95, 100
 
-
-    # Create Top Level TileMap Layer (for objects that overlap NPCs)
-    layer3 = map.createStaticLayer(2, tileset, 0, 32)
-    layer3.setCollisionByProperty({ collides: true })
-    @matter.world.convertTilemapLayer(layer3)
-
-
     #Player must be created AFTER world physics are established...
     playerSprite = @matter.add.sprite 100, 200, 'playerAnim'
     input = new window.roguehack.Input(@input)
@@ -66,6 +59,10 @@ module.exports =
     @cam = new window.roguehack.Camera(@cameras.main, @player)
     npc = new window.roguehack.Npc(@, @player, map)
 
+    # Create Top Level TileMap Layer (for objects that overlap NPCs)
+    layer3 = map.createStaticLayer(2, tileset, 0, 32)
+    layer3.setCollisionByProperty({ collides: true })
+    @matter.world.convertTilemapLayer(layer3)
 
   update: (timestep, dt) ->
     @player.update(dt)
